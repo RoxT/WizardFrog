@@ -1,0 +1,15 @@
+{
+    "Places": [
+        {
+            "what": "Observation platform for monitoring ??? (Gravity waves? Telescope?). Think lighthouse keeper.",
+            "character": "Lizard guy in work jumper, sitting casually"
+        }
+    ],
+    "Species": [
+        {
+            "what": "Lizard Guy",
+            "hirable": "Thief. Can sneak past things. Low damage. Unlock things."
+        }
+    ]
+    
+}

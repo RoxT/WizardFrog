@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Common/ContinueBtn.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Chaoclypse/frog.webp" type="Texture" id=2]
+[ext_resource path="res://Chaoclypse/snake.webp" type="Texture" id=3]
+[ext_resource path="res://default_theme.tres" type="Theme" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 154.0
+margin_top = 126.0
+margin_right = 867.0
+margin_bottom = 919.0
+theme = ExtResource( 4 )
+
+[node name="Title" type="Label" parent="Panel"]
+anchor_right = 1.0
+margin_top = 7.0
+margin_bottom = 21.0
+theme = ExtResource( 4 )
+theme_type_variation = "TitleLabel"
+text = "Monsters"
+align = 1
+
+[node name="Snake" type="TextureRect" parent="Panel/Title"]
+margin_left = 141.0
+margin_top = 66.0
+margin_right = 532.0
+margin_bottom = 457.0
+texture = ExtResource( 3 )
+
+[node name="Desc" type="Label" parent="Panel/Title"]
+margin_left = 36.0
+margin_top = 487.0
+margin_right = 677.0
+margin_bottom = 730.0
+text = "The galaxy is filled with ferocious creatures who will attack you on sight. Killing them gives you knowledge you can use to fight them."
+autowrap = true
+
+[node name="Panel2" type="Panel" parent="."]
+margin_left = 1058.0
+margin_top = 121.0
+margin_right = 1762.0
+margin_bottom = 911.0
+theme = ExtResource( 4 )
+
+[node name="Title" type="Label" parent="Panel2"]
+anchor_right = 1.0
+margin_top = 7.0
+margin_bottom = 21.0
+theme = ExtResource( 4 )
+theme_type_variation = "TitleLabel"
+text = "Species"
+align = 1
+
+[node name="Frog" type="TextureRect" parent="Panel2/Title"]
+margin_left = 152.0
+margin_top = 72.0
+margin_right = 543.0
+margin_bottom = 463.0
+texture = ExtResource( 2 )
+
+[node name="Desc" type="Label" parent="Panel2/Title"]
+margin_left = 36.0
+margin_top = 487.0
+margin_right = 672.0
+margin_bottom = 759.0
+text = "Many planets are inhabited by sentient creatures. You will often have to defeat them in combat to retrieve relics. Gaining knowledge of them will help either fight or talk to them in future encounters. If you can befriend them, they may trade a relic for a quest."
+autowrap = true
+
+[node name="ContinueBtn" parent="." instance=ExtResource( 1 )]
+margin_left = 1568.0
+margin_top = 941.0
+margin_right = 1823.0
+margin_bottom = 1035.0
+next_scene = "res://Map.tscn"

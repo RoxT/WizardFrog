@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Chaoclypse/wizard.webp" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://Foes/FoeScene.gd\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func start_encounter()->Array:
+	return [HELPFUL, CURIOUS, INDIFFERENT, WARY, RUDE, HOSTILE]
+	
+func get_hello():
+	return \"A wizard has seen you. ROLL to discover it's temperment towards you.\"
+
+func get_temperments():
+	return {
+		HELPFUL : \"It is %s \" % HELPFUL,
+		CURIOUS : \"It is %s \" % CURIOUS,
+		INDIFFERENT : \"It is %s \" % INDIFFERENT,
+		WARY: \"It is %s \" % WARY,
+		RUDE: \"It is %s \" % RUDE,
+		HOSTILE: \"It is %s \" % HOSTILE
+	}
+"
+
+[node name="Wizard"]
+texture = ExtResource( 2 )
+script = SubResource( 1 )

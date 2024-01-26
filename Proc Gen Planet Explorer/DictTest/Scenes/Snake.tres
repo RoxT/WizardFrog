@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://DictTest/Scene.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "Snake"
+texture = "Chaoclypse/snake.webp"
+hp = 3
+hello = "A snake has seen you. ROLL to discover it's temperment towards you."
+intro = [ "H", "C", "I", "W", "R", "O" ]
+scenes = {
+"1": {
+"options": [ "Leave" ],
+"talk": "The snake watches you"
+},
+"2": {
+"options": [ "Fight!" ],
+"talk": "The snake strikes!"
+},
+"3": {
+"options": [ "Leave" ],
+"talk": "The snake is looking at something...."
+},
+"C": 1,
+"H": 2,
+"I": 1,
+"O": 2,
+"R": 2,
+"W": 2
+}

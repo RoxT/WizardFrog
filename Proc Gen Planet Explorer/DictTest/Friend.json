@@ -1,0 +1,12 @@
+[{
+    "title": "Wizard",
+    "texture": "Chaoclypse/wizard.webp",
+    "hp": 3,
+    "hello": "A wizard has seen you. ROLL to discover it's temperment towards you.",
+    "intro": ["H", "C", "I", "W", "R", "O"],
+    "H": 1, "C":1, "I":1, "W": 2, "R":3, "O": 2,
+    "1": {"talk": "The Wizard does not wish to fight", "options":["Leave"]},
+    "2": {"talk": "The Wizard attacks!", "options":["Fight!"]},
+    "3": {"talk": "The Wizard make a rude noise and attacks!", "options":["Fight!"]}
+
+}]

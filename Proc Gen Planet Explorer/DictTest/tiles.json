@@ -1,0 +1,9 @@
+[
+    {
+        "title":"Mountain", "texture": "mountains.svg", "rations": 3
+    },
+    {
+        "title":"Grasslands", "texture": "grasslands.svg", "rations": 1
+    }
+
+]

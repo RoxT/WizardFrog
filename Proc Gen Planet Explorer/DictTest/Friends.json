@@ -1,0 +1,29 @@
+[
+    {
+        "title": "Wizard",
+        "texture": "Chaoclypse/wizard.webp",
+        "hp": 3,
+        "hello": "A wizard has seen you. ROLL to discover it's temperment towards you.",
+        "intro": ["H", "C", "I", "W", "R", "O"],
+        "H": "1", "C":"1", "I":"1", "W": "2", "R": "3", "O": "2",
+        "1": {"talk": "The Wizard does not wish to fight", "options":["Leave", "Talk"]},
+        "2": {"talk": "The Wizard attacks!", "options":["Fight!"]},
+        "3": {"talk": "The Wizard make a rude noise and attacks!", "options":["Fight!"]},
+        "Talk": {"talk": "\"Have you tried looking in the swamp?\"", "options": ["Yes","No"]},
+        "Yes": {"talk": "\"I think we can be friends then.\"", "options": ["Leave"]},
+        "No": {"talk": "\"There are some good bugs there\"", "options": ["Leave"]}
+        
+    },
+    {  
+        "title": "Snake",
+        "texture": "Chaoclypse/snake.webp",
+        "hp": 3,
+        "hello": "A snake has seen you. ROLL to discover it's temperment towards you.",
+        "intro": ["H", "C", "I", "W", "R", "O"],
+        "H": 2, "C":1, "I":1, "W": 2, "R":2, "O": 2,
+        "1": {"talk": "The snake watches you", "options":["Leave"]},
+        "2": {"talk": "The snake strikes!", "options":["Fight!"]},
+        "3": {"talk": "The snake is looking at something....", "options":["Leave"]}
+        
+    }
+]

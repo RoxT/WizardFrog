@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="128"
+   height="128"
+   viewBox="0 0 128 128"
+   version="1.1"
+   id="svg1"
+   inkscape:export-filename="grasslands.svg"
+   inkscape:export-xdpi="192"
+   inkscape:export-ydpi="192"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="scale(4)">
+    <rect
+       style="fill:#648000;fill-opacity:1;stroke-width:1.4211;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:24.2"
+       id="rect1"
+       width="32"
+       height="32"
+       x="0"
+       y="0"
+       inkscape:export-filename="grasslands.svg"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192" />
+    <ellipse
+       style="fill:#5aa02c;fill-opacity:1;stroke-width:1.4211;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:24.2"
+       id="path12"
+       cx="8.0270271"
+       cy="9.0540543"
+       rx="4.0810809"
+       ry="3.9189188" />
+    <ellipse
+       style="fill:#5aa02c;fill-opacity:1;stroke-width:1.4211;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:24.2"
+       id="path13"
+       cx="18.621622"
+       cy="24.837837"
+       rx="4.891892"
+       ry="5.0540543" />
+    <ellipse
+       style="fill:#5aa02c;fill-opacity:1;stroke-width:1.4211;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:24.2"
+       id="path14"
+       cx="23.351351"
+       cy="9.9729729"
+       rx="5.3513513"
+       ry="6.189189" />
+  </g>
+</svg>

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Map/mountains.svg" type="Texture" id=2]
+[ext_resource path="res://Map/MapTile.gd" type="Script" id=3]
+
+[node name="MapTile" type="TextureButton" groups=["tile"]]
+margin_right = 128.0
+margin_bottom = 129.0
+theme = ExtResource( 1 )
+texture_normal = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.047
+anchor_top = 0.927
+anchor_right = 0.047
+anchor_bottom = 0.927
+margin_left = 3.984
+margin_top = -31.583
+margin_right = 22.984
+margin_bottom = 7.41699
+text = "4"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+margin_right = 128.0
+margin_bottom = 128.0
+mouse_filter = 2
+border_color = Color( 1, 1, 1, 1 )
+border_width = 2.0
+editor_only = false
+
+[connection signal="pressed" from="." to="." method="_on_MapTile_pressed"]

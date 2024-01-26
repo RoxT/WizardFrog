@@ -1,0 +1,43 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://DictTest/Scene.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "Wizard"
+texture = "Chaoclypse/wizard.webp"
+hp = 3
+hello = "A wizard has seen you. ROLL to discover it's temperment towards you."
+intro = [ "H", "C", "I", "W", "R", "O" ]
+scenes = {
+"1": {
+"options": [ "Leave", "Talk" ],
+"talk": "The Wizard does not wish to fight"
+},
+"2": {
+"options": [ "Fight!" ],
+"talk": "The Wizard attacks!"
+},
+"3": {
+"options": [ "Fight!" ],
+"talk": "The Wizard make a rude noise and attacks!"
+},
+"C": "1",
+"H": "1",
+"I": "1",
+"No": {
+"options": [ "Leave" ],
+"talk": "\"There are some good bugs there\""
+},
+"O": "2",
+"R": "3",
+"Talk": {
+"options": [ "Yes", "No" ],
+"talk": "\"Have you tried looking in the swamp?\""
+},
+"W": "2",
+"Yes": {
+"options": [ "Leave" ],
+"talk": "\"I think we can be friends then.\""
+}
+}

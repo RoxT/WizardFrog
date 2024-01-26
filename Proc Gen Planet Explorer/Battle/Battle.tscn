@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Common/History.gd" type="Script" id=1]
+[ext_resource path="res://Battle/Battle.gd" type="Script" id=2]
+[ext_resource path="res://Common/RollBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://Battle/ChoiceButton.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.231373, 0.207843, 0.258824, 1 )
+
+[node name="Battle" type="CanvasLayer"]
+layer = 2
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="RollBox" parent="." instance=ExtResource( 3 )]
+margin_left = 1611.0
+margin_top = 22.0
+margin_right = 1884.0
+margin_bottom = 387.0
+
+[node name="Portrait" type="TextureRect" parent="."]
+margin_left = 616.0
+margin_top = 41.0
+margin_right = 1240.0
+margin_bottom = 665.0
+texture = ExtResource( 6 )
+stretch_mode = 2
+
+[node name="HP" type="Label" parent="Portrait"]
+margin_right = 617.0
+margin_bottom = 116.0
+text = "HP: 5"
+
+[node name="Talk" type="Label" parent="."]
+margin_left = 502.0
+margin_top = 808.0
+margin_right = 1379.0
+margin_bottom = 1002.0
+text = "A wizard has seen you. ROLL to discover it's temperment towards you"
+
+[node name="History" type="RichTextLabel" parent="."]
+margin_left = 1533.0
+margin_top = 421.0
+margin_right = 1874.0
+margin_bottom = 1036.0
+text = "History
+Temperment: Hostile
+You took 2 fire dmg
+It took 5 slicing dmg
+"
+script = ExtResource( 1 )
+
+[node name="Next" type="VFlowContainer" parent="."]
+margin_left = 1536.0
+margin_top = 806.0
+margin_right = 1808.0
+margin_bottom = 1050.0
+
+[node name="Choice" parent="Next" instance=ExtResource( 7 )]
+
+[node name="Choice2" parent="Next" instance=ExtResource( 7 )]
+margin_top = 49.0
+margin_bottom = 94.0
+
+[node name="Choice3" parent="Next" instance=ExtResource( 7 )]
+margin_top = 98.0
+margin_bottom = 143.0

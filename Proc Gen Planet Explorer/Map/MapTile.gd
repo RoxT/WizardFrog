@@ -12,9 +12,12 @@ func _ready():
 	hide_title()
 	_unclick(null)
 
+func snapped(cursor:Vector2)->Vector2:
+	return cursor.snapped(PE.TILE_SIZE)
 
-func place(x:float, y:float):
+func place(x:float, y:float)->Vector2:
 	rect_position = Vector2(x, y).snapped(PE.TILE_SIZE)
+	return rect_position
 	
 func show_title():
 	$Label.text = str(tile.rations)

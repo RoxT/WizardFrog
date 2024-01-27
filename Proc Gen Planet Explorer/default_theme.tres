@@ -1,15 +1,21 @@
-[gd_resource type="Theme" load_steps=5 format=2]
+[gd_resource type="Theme" load_steps=7 format=2]
 
 [ext_resource path="res://resources/genos_default.tres" type="DynamicFont" id=1]
 [ext_resource path="res://resources/genos_titles.tres" type="DynamicFont" id=2]
 [ext_resource path="res://resources/panel_stylebox.tres" type="StyleBox" id=3]
 [ext_resource path="res://resources/hover_stylebox.tres" type="StyleBox" id=4]
+[ext_resource path="res://resources/choice_hover_stylebox.tres" type="StyleBox" id=5]
+[ext_resource path="res://resources/choice_stylebox.tres" type="StyleBox" id=6]
 
 [resource]
 default_font = ExtResource( 1 )
 Button/styles/hover = ExtResource( 4 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 4 )
+ChoiceBtn/base_type = "Button"
+ChoiceBtn/styles/hover = ExtResource( 5 )
+ChoiceBtn/styles/normal = ExtResource( 6 )
+ChoiceBtn/styles/pressed = ExtResource( 5 )
 Label/fonts/font = ExtResource( 1 )
 Panel/styles/panel = ExtResource( 3 )
 TitleLabel/base_type = "Label"

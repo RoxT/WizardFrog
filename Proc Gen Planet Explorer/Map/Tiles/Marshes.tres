@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource( 1 )
-title = "Mountain"
-texture = "mountains.svg"
-rations = 3
-has_water = false
+title = "Marshes"
+texture = "marshes.svg"
+rations = 2
+has_water = true
 settlement = false

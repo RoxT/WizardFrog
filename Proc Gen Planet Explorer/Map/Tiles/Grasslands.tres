@@ -7,3 +7,5 @@ script = ExtResource( 1 )
 title = "Grasslands"
 texture = "grasslands.svg"
 rations = 1
+has_water = false
+settlement = false

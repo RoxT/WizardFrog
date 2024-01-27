@@ -18,6 +18,28 @@ func foe()->Dictionary:
 func load_foe(title:String)->Scene:
 	return load("res://DictTest/Scenes/%s.tres" % title) as Scene
 
+func get_random_settlement()->Tile:
+	var DIRECTORY_PATH := "res://Map/SettlementTiles/"
+	var directory := Directory.new()
+	if directory.open(DIRECTORY_PATH) != OK:
+		return null
+
+	var resources := []
+
+	var err = directory.list_dir_begin()
+	if err != OK: push_error("Directory error " + str(err))
+	var filename = directory.get_next()
+	while filename != "":
+		if filename.ends_with(".tres"):
+			var resource: Resource = load(DIRECTORY_PATH.plus_file(filename))
+			if not (resource is Tile):
+				continue
+			resources.append(resource)
+		filename = directory.get_next()
+	directory.list_dir_end()
+	return resources[randi() % resources.size()]
+	
+
 func get_all_tiles()->Dictionary:
 	# from https://gdquest.mavenseed.com/lessons/the-resource-database
 	var DIRECTORY_PATH := "res://Map/Tiles/"

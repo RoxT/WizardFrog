@@ -2,6 +2,7 @@
     {
         "title": "Wizard",
         "texture": "Chaoclypse/wizard.webp",
+        "sound": "quiet_frogs.ogg",
         "hp": 3,
         "hello": "A wizard has seen you. ROLL to discover it's temperment towards you.",
         "intro": ["H", "C", "I", "W", "R", "O"],

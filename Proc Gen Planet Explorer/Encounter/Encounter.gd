@@ -5,6 +5,7 @@ onready var history := $History
 onready var talk := $Talk
 onready var wizard := $Portrait
 onready var next_list : = $Next
+onready var audio_player := $AudioStreamPlayer
 const PATH := "res://%s"
 
 var foe:Scene
@@ -12,7 +13,7 @@ var foe:Scene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for n in next_list.get_children(): n.queue_free()
-	if foe == null: foe = load("res://DictTest/Scenes/Snake.tres") as Scene
+	if foe == null: foe = load("res://Data/Scenes/Wizard.tres") as Scene
 	var err := roll_box.connect("rolled", self, "on_rolled")
 	if err != OK: push_error("Error connecting " + str(err))
 	
@@ -20,6 +21,11 @@ func _ready():
 	wizard.texture = foe.load_texture()
 	$Portrait/HP.text = "HP: " + str(foe.hp)
 	$RollBox.actions = foe.intro
+	
+	var sound = foe.load_sound_or_null()
+	if sound != null:
+		audio_player.stream = sound
+		audio_player.play()
 
 func on_rolled(response:String):
 	destroy_options()
@@ -29,7 +35,7 @@ func on_rolled(response:String):
 	talk.text = next.talk
 	var options = next.options
 	for o in options:
-		var btn = preload("res://Battle/ChoiceButton.tscn").instance() as Button
+		var btn = preload("res://Encounter/ChoiceButton.tscn").instance() as Button
 		btn.text = o
 		var err = btn.connect("pressed", self, "_on_Next_pressed", [o])
 		if err != OK: push_error("Error connecting " + str(err))

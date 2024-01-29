@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://Map/TileResource.gd" type="Script" id=1]
+[ext_resource path="res://Data/Tiles/TileResource.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
@@ -9,3 +9,4 @@ texture = "mountains.svg"
 rations = 3
 has_water = false
 settlement = false
+sound = ""

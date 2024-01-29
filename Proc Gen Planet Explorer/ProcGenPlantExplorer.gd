@@ -5,21 +5,12 @@ const TILE_SIZE := Vector2(128, 128)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
-
-func foe()->Dictionary:
-	var file := File.new()
-	var err = file.open("res://DictTest/result.scene", File.READ)
-	if err != OK: push_error("Error opening file " + str(err))
-	var dict = str2var(file.get_as_text())
-	file.close()
-	return dict
 	
 func load_foe(title:String)->Scene:
-	return load("res://DictTest/Scenes/%s.tres" % title) as Scene
+	return load("res://Data/Scenes/%s.tres" % title) as Scene
 
 func get_random_settlement()->Tile:
-	var DIRECTORY_PATH := "res://Map/SettlementTiles/"
+	var DIRECTORY_PATH := "res://Data/Tiles/Settlements/"
 	var directory := Directory.new()
 	if directory.open(DIRECTORY_PATH) != OK:
 		return null
@@ -42,7 +33,7 @@ func get_random_settlement()->Tile:
 
 func get_all_tiles()->Dictionary:
 	# from https://gdquest.mavenseed.com/lessons/the-resource-database
-	var DIRECTORY_PATH := "res://Map/Tiles/"
+	var DIRECTORY_PATH := "res://Data/Tiles/"
 	var directory := Directory.new()
 	if directory.open(DIRECTORY_PATH) != OK:
 		return {}
@@ -66,7 +57,7 @@ func get_all_tiles()->Dictionary:
 
 func get_all_foes()->Array:
 	# from https://gdquest.mavenseed.com/lessons/the-resource-database
-	var DIRECTORY_PATH := "res://DictTest/Scenes/"
+	var DIRECTORY_PATH := "res://Data/Scenes/"
 	var directory := Directory.new()
 	if directory.open(DIRECTORY_PATH) != OK:
 		return []

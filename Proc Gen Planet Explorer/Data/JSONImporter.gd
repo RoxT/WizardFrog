@@ -7,20 +7,15 @@ func _ready():
 	parse_scenes()
 	parse_map_tiles()
 	parse_cities()
-#	load_scene("res://DictTest/Friend.json")
-#	$Label.text = str(_scene_data)
-#	_store_scene_data(_scene_data, "res://DictTest/result.scene")
-#	load_scene("res://DictTest/result.scene")
-#	$Label2.text = str(_scene_data)
 
 func parse_cities():
 	var file := File.new()
-	var err = file.open("res://DictTest/OneOffs/settlement_tiles.json", File.READ)
+	var err = file.open(Tile.CITIES_JSON, File.READ)
 	if err != OK: push_error("Error opening file " + str(err))
 	var scenes:Array = str2var(file.get_as_text())
 	for s in scenes:
 		var new = Tile.new()
-		new.parse(s, "SettlementTiles")
+		new.parse(s, Tile.CITIES_FOLDER)
 		var tex := TextureRect.new()
 		tex.texture = new.load_texture()
 		$HFlowContainer.add_child(tex)
@@ -29,7 +24,7 @@ func parse_cities():
 	
 func parse_scenes():
 	var file := File.new()
-	var err = file.open("res://DictTest/Friends.json", File.READ)
+	var err := file.open(Scene.SCENES_JSON, File.READ)
 	if err != OK: push_error("Error opening file " + str(err))
 	var scenes:Array = str2var(file.get_as_text())
 	for s in scenes:
@@ -43,12 +38,12 @@ func parse_scenes():
 
 func parse_map_tiles():
 	var file := File.new()
-	var err = file.open("res://DictTest/tiles.json", File.READ)
+	var err = file.open(Tile.TILES_JSON, File.READ)
 	if err != OK: push_error("Error opening file " + str(err))
 	var scenes:Array = str2var(file.get_as_text())
 	for s in scenes:
 		var new = Tile.new()
-		new.parse(s, "Tiles")
+		new.parse(s, Tile.TILES_FOLDER)
 		var tex := TextureRect.new()
 		tex.texture = new.load_texture()
 		$HFlowContainer.add_child(tex)

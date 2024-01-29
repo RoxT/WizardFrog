@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Scene",
 "language": "GDScript",
-"path": "res://DictTest/Scene.gd"
+"path": "res://Data/Scenes/SceneResource.gd"
 }, {
 "base": "Resource",
 "class": "Tile",
 "language": "GDScript",
-"path": "res://Map/TileResource.gd"
+"path": "res://Data/Tiles/TileResource.gd"
 } ]
 _global_script_class_icons={
 "Scene": "",

@@ -7,7 +7,7 @@ signal clicked(map_tile)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if tile_override != null: tile = tile_override
+	if tile == null: tile = tile_override
 	texture_normal = tile.load_texture()
 	hide_title()
 	_unclick(null)

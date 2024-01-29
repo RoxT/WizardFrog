@@ -57,6 +57,7 @@ func random_tile()->Tile:
 
 func _on_foe_pressed(index:int):
 	print(foes[index].title)
-	var battle = load("res://Battle/Battle.tscn").instance()
+	var battle = load("res://Encounter/Encounter.tscn").instance()
 	battle.foe = foes[index]
+	
 	add_child(battle)

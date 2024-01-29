@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://DictTest/Scene.gd" type="Script" id=1]
+[ext_resource path="res://Data/Scenes/SceneResource.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
@@ -41,3 +41,4 @@ scenes = {
 "talk": "\"I think we can be friends then.\""
 }
 }
+sound = "quiet_frogs.ogg"

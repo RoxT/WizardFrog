@@ -16,11 +16,14 @@ func _ready():
 
 
 func set_actions(value:Array):
+	if not ready:
+		return
+	$Roll.disabled = (value.size() == 0)
+	if value.size() == 0:
+		return
 	assert(value.size() == 6)
 	if result > -1: label_list[result].remove_stylebox_override("normal")
 	actions = value
-	if not ready:
-		return
 	for i in range(6):
 		var t:String
 		match actions[i]:

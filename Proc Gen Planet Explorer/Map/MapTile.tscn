@@ -22,12 +22,4 @@ margin_right = 22.984
 margin_bottom = 7.41699
 text = "4"
 
-[node name="ReferenceRect" type="ReferenceRect" parent="."]
-margin_right = 128.0
-margin_bottom = 128.0
-mouse_filter = 2
-border_color = Color( 1, 1, 1, 1 )
-border_width = 2.0
-editor_only = false
-
 [connection signal="pressed" from="." to="." method="_on_MapTile_pressed"]

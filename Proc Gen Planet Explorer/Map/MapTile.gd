@@ -3,6 +3,9 @@ extends TextureButton
 export(Resource) var tile_override
 var tile:Tile
 
+# To Save
+var visited := false
+
 signal clicked(map_tile)
 
 # Called when the node enters the scene tree for the first time.
@@ -28,13 +31,14 @@ func hide_title():
 	
 func _click():
 	emit_signal("clicked", self)
-	show_title()
-	$ReferenceRect.show()
 	get_tree().call_group("tile", "_unclick", self)
+
+func select():
+	show_title()
+	
 
 func _unclick(map_tile):
 	if map_tile == null or map_tile != self:
-		$ReferenceRect.hide()
 		hide_title()
 
 

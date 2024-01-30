@@ -12,6 +12,7 @@ var foe:Scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Panel.modulate.a = 0.5
 	if foe == null: foe = load("res://Data/Scenes/Wizard.tres") as Scene
 	var err := roll_box.connect("rolled", self, "on_rolled")
 	if err != OK: push_error("Error connecting " + str(err))
@@ -27,6 +28,7 @@ func _ready():
 		audio_player.play()
 
 func on_rolled(response:String):
+	$Panel.modulate.a = 1
 	var next = foe.scenes[response]
 	if !(next is Dictionary):
 		next = foe.scenes[next as String]

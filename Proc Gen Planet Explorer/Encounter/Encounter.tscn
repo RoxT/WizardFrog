@@ -14,6 +14,7 @@ layer = 2
 script = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0.478431 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )

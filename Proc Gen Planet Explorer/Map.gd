@@ -3,7 +3,9 @@ extends Control
 onready var tiles_layer := $TilesLayer
 onready var foe_layer := $FoesLayer
 onready var rollbox := $HUD/RollBox
-onready var center := get_rect().get_center()
+onready var player := $HUD/Player
+onready var ref_rect := $HUD/ReferenceRect
+onready var center := get_rect().get_center().snapped(PE.TILE_SIZE)
 onready var UP := Vector2.UP * PE.TILE_SIZE
 onready var DOWN := Vector2.DOWN * PE.TILE_SIZE
 onready var RIGHT := Vector2.RIGHT * PE.TILE_SIZE
@@ -16,7 +18,7 @@ var rand := RandomNumberGenerator.new()
 var tile_map := {}
 var last_tile_clicked:TextureButton
 
-# To go in save game:
+# To save:
 var rations := 10
 
 # Called when the node enters the scene tree for the first time.
@@ -25,8 +27,10 @@ func _ready():
 	rand.randomize()
 	foes = PE.get_all_foes()
 	places = PE.get_all_places()
-	cursor = center
+	cursor = center.snapped(PE.TILE_SIZE)
 	place_tile(cursor, PE.get_random_settlement() as Tile)
+	tile_map[cursor].visited = true
+	move_player(cursor)
 	possible_tiles = PE.get_all_tiles()
 	for _i in range(20):
 		place_tile(cursor)
@@ -38,6 +42,7 @@ func _ready():
 		place_tile(cursor)
 	var err := rollbox.connect("rolled", self, "_on_roll")
 	if err != OK: push_error("Can't connect rollbox " + str(err))
+	ref_rect.rect_position = center
 	print("----------------")
 
 func place_foe():
@@ -73,8 +78,15 @@ func place_tile(pos:Vector2, to_place:Tile=random_tile()):
 func random_tile()->Tile:
 	return possible_tiles[possible_tiles.keys()[randi()%possible_tiles.keys().size()]]
 
+func move_player(pos:Vector2):
+	pos = pos.snapped(PE.TILE_SIZE)
+	player.position = pos
+	tile_map[pos].visited = true
+
 func _on_roll(outcome:String):
+	cursor = last_tile_clicked.rect_position
 	rations -= last_tile_clicked.tile.rations
+	move_player(last_tile_clicked.rect_position)
 	$HUD/Rations.text = str(rations)
 	match outcome:
 		"Nothing": pass
@@ -94,15 +106,22 @@ func _on_roll(outcome:String):
 	if !tile_map.has(pos + DOWN):
 		place_tile(pos + DOWN)
 
-
 func _on_tile_clicked(tile:TextureButton):
+	if tile.rect_position.distance_to(player.position) != PE.TILE_SIZE.x:
+		ref_rect.editor_only = true
+		rollbox.actions = []
+		$HUD/Talk.text = "Choose a tile adjacent to you to move."
+		return
+	ref_rect.editor_only = false
+	ref_rect.rect_position = tile.rect_position
+	tile.select()
 	var data := tile.tile as Tile
 	rollbox.set_actions(data.load_outcomes())
 	$HUD/Talk.text = "Roll to spend " + str(data.rations) + " rations to move into tile."
 	$HUD/Talk.show()
 	last_tile_clicked = tile
-	cursor = tile.rect_position
-
+	
+	
 func _on_scene_pressed(scene:Scene):
 	print(scene.title)
 	var battle = load("res://Encounter/Encounter.tscn").instance()

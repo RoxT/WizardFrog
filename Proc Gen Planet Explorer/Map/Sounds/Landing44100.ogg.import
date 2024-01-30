@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Landing44100.ogg-29afaeb834ad04cfe7ae4dfb8aec288f.oggstr"
+
+[deps]
+
+source_file="res://Map/Sounds/Landing44100.ogg"
+dest_files=[ "res://.import/Landing44100.ogg-29afaeb834ad04cfe7ae4dfb8aec288f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

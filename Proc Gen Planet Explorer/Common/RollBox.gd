@@ -2,7 +2,7 @@ extends Panel
 
 export(Array, String) var actions setget set_actions
 onready var label_list := $ActionList.get_children()
-var result:int
+var result:int = -1
 var ready := false
 
 signal rolled(action)
@@ -14,8 +14,10 @@ func _ready():
 		for i in range(6):
 			label_list[i].text = actions[i]
 
+
 func set_actions(value:Array):
 	assert(value.size() == 6)
+	if result > -1: label_list[result].remove_stylebox_override("normal")
 	actions = value
 	if not ready:
 		return

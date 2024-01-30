@@ -9,4 +9,5 @@ texture = "mountains.svg"
 rations = 3
 has_water = false
 settlement = false
-sound = ""
+sound = "Mountain.ogg"
+outcomes = [ "Discovery", "Encounter", "Encounter" ]

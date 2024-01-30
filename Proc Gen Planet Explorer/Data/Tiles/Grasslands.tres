@@ -10,3 +10,4 @@ rations = 1
 has_water = false
 settlement = false
 sound = ""
+outcomes = [ "Discovery", "Encounter", "Encounter" ]

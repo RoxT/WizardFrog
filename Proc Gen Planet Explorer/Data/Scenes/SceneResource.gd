@@ -9,6 +9,8 @@ export var scenes := {}
 export var sound := "quiet_frogs.ogg"
 const SCENES_FOLDER := "res://Data/Scenes/"
 const SCENES_JSON := "res://Data/Scenes/Friends.json"
+const DISCOVERIES_JSON := "res://Data/Scenes/Discoveries/Places.json"
+const DISCOVERIES_FOLDER := "res://Data/Scenes/Discoveries/"
 #export(Resource) var sub_resource
 #export(Array, String) var strings
 
@@ -29,14 +31,14 @@ func load_texture()->Texture:
 
 func load_sound_or_null():
 	if sound == "": return null
-	return load("res://Map/Sounds/" + sound) as AudioStreamOGGVorbis
+	return load("res://Encounter/Sounds/" + sound) as AudioStreamOGGVorbis
 
-func parse(d:Dictionary):
+func parse(d:Dictionary, folder:String):
 	for key in d.keys():
 		if get(key) == null:
 			scenes[key] = d[key]
 		else:
 			assert(typeof(d[key]) == typeof(get(key)))
 			set(key, d[key])
-	var err = ResourceSaver.save(SCENES_FOLDER + title + ".tres", self)
+	var err = ResourceSaver.save(folder + title + ".tres", self)
 	if err != OK:push_warning("Save failed " + str(err))

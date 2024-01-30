@@ -54,6 +54,27 @@ func get_all_tiles()->Dictionary:
 	directory.list_dir_end()
 
 	return resources
+	
+func get_all_places()->Array:
+	var DIRECTORY_PATH := "res://Data/Scenes/Discoveries"
+	var directory := Directory.new()
+	if directory.open(DIRECTORY_PATH) != OK:
+		return []
+
+	var resources := []
+
+	var err = directory.list_dir_begin()
+	if err != OK: push_error("Directory error " + str(err))
+	var filename = directory.get_next()
+	while filename != "":
+		if filename.ends_with(".tres"):
+			var resource: Resource = load(DIRECTORY_PATH.plus_file(filename))
+			if not (resource is Scene):
+				continue
+			resources.append(resource)
+		filename = directory.get_next()
+	directory.list_dir_end()
+	return resources
 
 func get_all_foes()->Array:
 	# from https://gdquest.mavenseed.com/lessons/the-resource-database

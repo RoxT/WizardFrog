@@ -5,8 +5,23 @@ var _scene_data:Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	parse_scenes()
+	parse_discoveries()
 	parse_map_tiles()
 	parse_cities()
+
+func parse_discoveries():
+	var file := File.new()
+	var err := file.open(Scene.DISCOVERIES_JSON, File.READ)
+	if err != OK: push_error("Error opening file " + str(err))
+	var scenes:Array = str2var(file.get_as_text())
+	for s in scenes:
+		var new = Scene.new()
+		new.parse(s, Scene.DISCOVERIES_FOLDER)
+		var tex := TextureRect.new()
+		tex.texture = new.load_texture()
+		$HFlowContainer.add_child(tex)
+		print(str(new))
+	file.close()
 
 func parse_cities():
 	var file := File.new()
@@ -29,7 +44,7 @@ func parse_scenes():
 	var scenes:Array = str2var(file.get_as_text())
 	for s in scenes:
 		var new = Scene.new()
-		new.parse(s)
+		new.parse(s, Scene.SCENES_FOLDER)
 		var tex := TextureRect.new()
 		tex.texture = new.load_texture()
 		$HFlowContainer.add_child(tex)

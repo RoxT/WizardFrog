@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Common/Choices.gd" type="Script" id=2]
+[ext_resource path="res://Encounter/ChoiceButton.tscn" type="PackedScene" id=3]
+
+[node name="Next" type="VFlowContainer"]
+margin_left = 1536.0
+margin_top = 806.0
+margin_right = 1808.0
+margin_bottom = 1125.0
+script = ExtResource( 2 )
+
+[node name="Choice" parent="." instance=ExtResource( 3 )]
+margin_bottom = 96.0
+
+[node name="Choice2" parent="." instance=ExtResource( 3 )]
+margin_top = 100.0
+margin_bottom = 196.0
+
+[node name="Choice3" parent="." instance=ExtResource( 3 )]
+margin_top = 200.0
+margin_bottom = 296.0

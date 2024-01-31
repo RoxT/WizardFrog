@@ -2,9 +2,10 @@ extends Control
 
 onready var tiles_layer := $TilesLayer
 onready var foe_layer := $FoesLayer
-onready var rollbox := $HUD/RollBox
-onready var player := $HUD/Player
-onready var ref_rect := $HUD/ReferenceRect
+onready var hud := $HUD
+onready var rollbox = hud.rollbox
+onready var player := $UI/Player
+onready var ref_rect := $UI/ReferenceRect
 onready var center := get_rect().get_center().snapped(PE.TILE_SIZE)
 onready var UP := Vector2.UP * PE.TILE_SIZE
 onready var DOWN := Vector2.DOWN * PE.TILE_SIZE
@@ -40,28 +41,22 @@ func _ready():
 		place_tile(cursor)
 		cursor += [UP, DOWN, LEFT, RIGHT][rand.randi()%4]
 		place_tile(cursor)
-	var err := rollbox.connect("rolled", self, "_on_roll")
+	var err = rollbox.connect("rolled", self, "_on_roll")
 	if err != OK: push_error("Can't connect rollbox " + str(err))
 	ref_rect.rect_position = center
 	print("----------------")
 
-func place_foe():
+func place_foe(tile:Control):
 	var foe_i := rand.randi()%foes.size()
 	var foe := foes[foe_i] as Scene
-	place_scene(foe)
-	
-func place_scene(scene:Scene):
-	var btn = TextureButton.new()
-	btn.texture_normal = scene.load_texture()
-	btn.connect("pressed", self, "_on_scene_pressed", [scene])
-	btn.rect_scale = PE.TILE_SIZE/btn.texture_normal.get_size()
-	btn.rect_position = cursor.snapped(PE.TILE_SIZE)
-	foe_layer.add_child(btn)
+	tile.change_scene(foe)
+	_on_scene_pressed(foe)
 
-func place_discovery():
+func place_discovery(tile:Control):
 	var place_i := rand.randi()%places.size()
 	var place := places[place_i] as Scene
-	place_scene(place)
+	tile.change_scene(place)
+	_on_scene_pressed(place)
 
 func place_tile(pos:Vector2, to_place:Tile=random_tile()):
 	if pos.snapped(PE.TILE_SIZE) in tile_map:
@@ -87,15 +82,16 @@ func _on_roll(outcome:String):
 	cursor = last_tile_clicked.rect_position
 	rations -= last_tile_clicked.tile.rations
 	move_player(last_tile_clicked.rect_position)
-	$HUD/Rations.text = str(rations)
+	last_tile_clicked.visited = true
+	$UI/Rations.text = str(rations)
 	match outcome:
 		"Nothing": pass
 		"Discovery":
 			$HUD/Talk.text = "You found something cool"
-			place_discovery()
+			place_discovery(last_tile_clicked)
 		"Encounter":
 			$HUD/Talk.text = "Someone has seen you"
-			place_foe()
+			place_foe(last_tile_clicked)
 	var pos = last_tile_clicked.rect_position
 	if !tile_map.has(pos + RIGHT):
 		place_tile(pos + RIGHT)
@@ -124,7 +120,7 @@ func _on_tile_clicked(tile:TextureButton):
 	
 func _on_scene_pressed(scene:Scene):
 	print(scene.title)
-	var battle = load("res://Encounter/Encounter.tscn").instance()
+	var battle = preload("res://Encounter/Encounter.tscn").instance()
 	battle.foe = scene
-	
+	battle.hud = hud
 	add_child(battle)

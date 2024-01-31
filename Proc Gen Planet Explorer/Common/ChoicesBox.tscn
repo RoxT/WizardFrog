@@ -11,12 +11,12 @@ margin_bottom = 1125.0
 script = ExtResource( 2 )
 
 [node name="Choice" parent="." instance=ExtResource( 3 )]
-margin_bottom = 96.0
+margin_bottom = 64.0
 
 [node name="Choice2" parent="." instance=ExtResource( 3 )]
-margin_top = 100.0
-margin_bottom = 196.0
+margin_top = 68.0
+margin_bottom = 132.0
 
 [node name="Choice3" parent="." instance=ExtResource( 3 )]
-margin_top = 200.0
-margin_bottom = 296.0
+margin_top = 136.0
+margin_bottom = 200.0

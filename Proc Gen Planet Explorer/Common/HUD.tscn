@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Common/ChoicesBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Common/RollBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Common/HUD.gd" type="Script" id=3]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 3
+script = ExtResource( 3 )
+
+[node name="RollBox" parent="." instance=ExtResource( 2 )]
+margin_left = 1611.0
+margin_top = 22.0
+margin_right = 1884.0
+margin_bottom = 387.0
+
+[node name="Talk" type="Label" parent="."]
+margin_left = 502.0
+margin_top = 808.0
+margin_right = 1379.0
+margin_bottom = 1002.0
+
+[node name="Next" parent="." instance=ExtResource( 1 )]

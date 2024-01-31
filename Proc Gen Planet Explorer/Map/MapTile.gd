@@ -2,6 +2,7 @@ extends TextureButton
 
 export(Resource) var tile_override
 var tile:Tile
+var scene:Scene
 
 # To Save
 var visited := false
@@ -14,6 +15,17 @@ func _ready():
 	texture_normal = tile.load_texture()
 	hide_title()
 	_unclick(null)
+	change_scene(scene)
+
+func change_scene(value:Scene):
+	scene = value
+	if scene == null:
+		$SceneTex.hide()
+	else:
+		$SceneTex.show()
+		var tex:Texture = scene.load_texture()
+		$SceneTex.texture = tex
+		$SceneTex.rect_scale = PE.TILE_SIZE/tex.get_size()
 
 func snapped(cursor:Vector2)->Vector2:
 	return cursor.snapped(PE.TILE_SIZE)

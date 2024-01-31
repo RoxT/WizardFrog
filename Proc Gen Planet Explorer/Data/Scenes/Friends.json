@@ -21,7 +21,7 @@
         "hp": 3,
         "hello": "A snake has seen you. ROLL to discover it's temperment towards you.",
         "intro": ["H", "C", "I", "W", "R", "O"],
-        "H": 2, "C":1, "I":1, "W": 2, "R":2, "O": 2,
+        "H": 3, "C":1, "I":1, "W": 2, "R":2, "O": 2,
         "1": {"talk": "The snake watches you", "options":["Leave"]},
         "2": {"talk": "The snake strikes!", "options":["Fight!"]},
         "3": {"talk": "The snake is looking at something....", "options":["Leave"]}

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Data/Characters/FocusResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "Ecologist"
+stats = [ "dex", "wil", "str" ]
+nat_arm = 1
+ability = "Reduces the amount of rations needed. Finds extra tiles."

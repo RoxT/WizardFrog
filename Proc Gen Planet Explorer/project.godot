@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "Focus",
+"language": "GDScript",
+"path": "res://Data/Characters/FocusResource.gd"
+}, {
+"base": "Resource",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Data/Characters/PlayerResource.gd"
+}, {
+"base": "Resource",
 "class": "Scene",
 "language": "GDScript",
 "path": "res://Data/Scenes/SceneResource.gd"
@@ -20,6 +30,8 @@ _global_script_classes=[ {
 "path": "res://Data/Tiles/TileResource.gd"
 } ]
 _global_script_class_icons={
+"Focus": "",
+"Player": "",
 "Scene": "",
 "Tile": ""
 }

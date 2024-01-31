@@ -8,6 +8,21 @@ func _ready():
 	parse_discoveries()
 	parse_map_tiles()
 	parse_cities()
+	parse_focuses()
+
+func parse_focuses():
+	var file := File.new()
+	var err = file.open(Focus.FOCUSES_JSON, File.READ)
+	if err != OK: push_error("Error opening file " + str(err))
+	var scenes:Array = str2var(file.get_as_text())
+	for s in scenes:
+		var new = Focus.new()
+		new.parse(s)
+		var tex := Label.new()
+		tex.text = new.title
+		$HFlowContainer.add_child(tex)
+		print(str(new))
+	file.close()	
 
 func parse_discoveries():
 	var file := File.new()

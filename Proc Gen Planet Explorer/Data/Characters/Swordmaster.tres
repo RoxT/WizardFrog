@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 title = "Swordmaster"
-stats = [ "str", "dex", "wil" ]
+stats = [ "str_", "dex", "wil" ]
 nat_arm = 3
 ability = "Wields any weapon. High natural armour."

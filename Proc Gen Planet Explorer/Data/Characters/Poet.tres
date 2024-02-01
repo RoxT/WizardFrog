@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 title = "Poet"
-stats = [ "wil", "dex", "str" ]
+stats = [ "wil", "dex", "str_" ]
 nat_arm = 1
 ability = "Knows the names of things - replaces 'Hostile' with 'Friendly'."

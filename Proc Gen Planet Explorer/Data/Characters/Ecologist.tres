@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 title = "Ecologist"
-stats = [ "dex", "wil", "str" ]
+stats = [ "dex", "wil", "str_" ]
 nat_arm = 1
 ability = "Reduces the amount of rations needed. Finds extra tiles."

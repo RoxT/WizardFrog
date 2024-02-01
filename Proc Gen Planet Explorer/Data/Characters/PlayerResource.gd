@@ -4,7 +4,7 @@ export(int) var max_hp
 export(int) var hp
 export(String) var title
 export(Resource) var focus
-export(int) var max_str
+export(int) var max_str_
 export(int) var max_dex
 export(int) var max_wil
 export(int) var str_
@@ -22,34 +22,56 @@ const NAMES := ["Jules", "Glorbo", "Gneissi", "Darla"]
 # your resource via the inspector.
 func _init(
 	new_focus=Focus.new(), new_max_hp=randi()%6, new_title=NAMES[randi()%NAMES.size()], 
-	new_max_str=10, new_max_dex=10, new_max_wil=10, new_arm=0):
+	new_arm=0):
 	max_hp = new_max_hp
 	hp = new_max_hp
 	title = new_title
 	focus = new_focus
-	var stats := roll_3d6()
-	stats.sort()
+	var rolls := roll_3d6()
+	rolls.sort()
 	var i := 2
 	for s in new_focus.stats:
-		set(s, i)
+		set("max_"+ s, rolls[i])
 		i -= 1
-	max_str = new_max_str
-	max_dex = new_max_dex
-	max_wil = new_max_wil
-	str_ = new_max_str
-	dex = new_max_dex
-	wil = new_max_wil
+	str_ = max_str_
+	dex = max_dex
+	wil = max_wil
 	arm = new_arm
 	id = randi()
+	
+
+func stat_to_string(stat:String)->String:
+	if get(stat) != get("max_" + stat):
+		return str(get(stat)) + "/" + str(get("max_" + get(stat)))
+	else:
+		return str(get(stat))
+	
+func moved():
+	hp += max(round(max_hp/2), max_hp)
+	
+func hit_deadly(amount:int)->bool:
+	if hp-amount <0:
+		hp = 0
+		str_ += (hp-amount)
+		return true
+	return false
+
+func hit_combat(amount:int):
+	if hp-amount <0:
+		hp = 0
+		return true
+	return false
 	
 func armour()->int:
 	return arm + focus.nat_arm
 	
 static func roll_3d6()->Array:
+	var rng = PE.rng
+	rng.randomize()
 	var results := []
-	results.append(randi()%6 + randi()%6 + randi()%6)
-	results.append(randi()%6 + randi()%6 + randi()%6)
-	results.append(randi()%6 + randi()%6 + randi()%6)
+	results.append(rng.randi()%6 + rng.randi()%6 + rng.randi()%6)
+	results.append(rng.randi()%6 + rng.randi()%6 + rng.randi()%6)
+	results.append(rng.randi()%6 + rng.randi()%6 + rng.randi()%6)
 	return results
 
 func parse(d:Dictionary):

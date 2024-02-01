@@ -1,10 +1,17 @@
 extends Node
 
 const TILE_SIZE := Vector2(128, 128)
+var rng := RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	rng.randomize()
+
+func new_random_player(focus_name:String="Swordmaster"):
+	var focus := load(Focus.CHARACTERS_FOLDER + focus_name + ".tres") as Focus
+	var result = Player.new(focus)
+	#To save
+	return result
 	
 func load_foe(title:String)->Scene:
 	return load("res://Data/Scenes/%s.tres" % title) as Scene

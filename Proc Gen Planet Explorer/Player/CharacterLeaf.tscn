@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Player/CharacterLeaf.gd" type="Script" id=2]
 
 [node name="CharacterLeaf" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1676.0
-margin_bottom = -769.0
+margin_bottom = -717.0
+script = ExtResource( 2 )
 
 [node name="Name" type="Label" parent="."]
 margin_left = 12.0
@@ -17,11 +19,18 @@ theme = ExtResource( 1 )
 theme_type_variation = "TitleLabel"
 text = "Jules"
 
+[node name="Focus" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 58.0
+margin_right = 86.0
+margin_bottom = 97.0
+text = "Focus"
+
 [node name="Stats" type="Label" parent="."]
-margin_left = 11.0
-margin_top = 57.0
-margin_right = 70.0
-margin_bottom = 180.0
+margin_left = 12.0
+margin_top = 99.0
+margin_right = 71.0
+margin_bottom = 222.0
 text = "STR:
 DEX:
 WIL:"
@@ -47,10 +56,10 @@ margin_bottom = 124.0
 text = "15"
 
 [node name="State" type="Label" parent="."]
-margin_left = 11.0
-margin_top = 184.0
-margin_right = 106.0
-margin_bottom = 265.0
+margin_left = 12.0
+margin_top = 226.0
+margin_right = 107.0
+margin_bottom = 323.0
 theme_type_variation = "TitleLabel"
 text = "HP:
 DEF:"

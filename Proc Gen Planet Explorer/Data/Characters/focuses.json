@@ -1,14 +1,14 @@
 [
     {
-        "title": "Swordmaster", "stats": ["str", "dex", "wil"], "nat_arm": 3, "ability": "Wields any weapon. High natural armour."
+        "title": "Swordmaster", "stats": ["str_", "dex", "wil"], "nat_arm": 3, "ability": "Wields any weapon. High natural armour."
     },
     {
-        "title": "Poet", "stats": ["wil", "dex", "str"], "nat_arm": 1, "ability": "Knows the names of things - replaces 'Hostile' with 'Friendly'."
+        "title": "Poet", "stats": ["wil", "dex", "str_"], "nat_arm": 1, "ability": "Knows the names of things - replaces 'Hostile' with 'Friendly'."
     },
     {
-        "title": "Sneak", "stats": ["dex", "str", "wil"], "nat_arm": 2, "ability": "Can avoid others."
+        "title": "Sneak", "stats": ["dex", "str_", "wil"], "nat_arm": 2, "ability": "Can avoid others."
     },
     {
-        "title": "Ecologist", "stats": ["dex", "wil", "str"], "nat_arm": 1, "ability": "Reduces the amount of rations needed. Finds extra tiles."
+        "title": "Ecologist", "stats": ["dex", "wil", "str_"], "nat_arm": 1, "ability": "Reduces the amount of rations needed. Finds extra tiles."
     }
 ]

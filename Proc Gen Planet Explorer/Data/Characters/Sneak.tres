@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 title = "Sneak"
-stats = [ "dex", "str", "wil" ]
+stats = [ "dex", "str_", "wil" ]
 nat_arm = 2
 ability = "Can avoid others."

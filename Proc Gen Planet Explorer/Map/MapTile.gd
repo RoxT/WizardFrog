@@ -11,6 +11,7 @@ signal clicked(map_tile)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visit(visited)
 	if tile == null: tile = tile_override
 	texture_normal = tile.load_texture()
 	hide_title()
@@ -33,6 +34,13 @@ func snapped(cursor:Vector2)->Vector2:
 func place(x:float, y:float)->Vector2:
 	rect_position = Vector2(x, y).snapped(PE.TILE_SIZE)
 	return rect_position
+	
+func visit(value=true):
+	visited = value
+	if value:
+		$AnimationPlayer.play("Visited")
+	else:
+		$AnimationPlayer.play("Fog")
 	
 func show_title():
 	$Label.text = str(tile.rations)

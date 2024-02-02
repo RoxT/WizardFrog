@@ -10,10 +10,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 154.0
-margin_top = 126.0
-margin_right = 867.0
-margin_bottom = 919.0
+margin_left = 1048.0
+margin_top = 68.0
+margin_right = 1761.0
+margin_bottom = 875.0
 theme = ExtResource( 4 )
 
 [node name="Title" type="Label" parent="Panel"]
@@ -41,10 +41,10 @@ text = "The galaxy is filled with ferocious creatures who will attack you on sig
 autowrap = true
 
 [node name="Panel2" type="Panel" parent="."]
-margin_left = 1058.0
-margin_top = 121.0
-margin_right = 1762.0
-margin_bottom = 911.0
+margin_left = 87.0
+margin_top = 68.0
+margin_right = 938.0
+margin_bottom = 991.0
 theme = ExtResource( 4 )
 
 [node name="Title" type="Label" parent="Panel2"]
@@ -57,17 +57,17 @@ text = "Species"
 align = 1
 
 [node name="Frog" type="TextureRect" parent="Panel2/Title"]
-margin_left = 152.0
-margin_top = 72.0
-margin_right = 543.0
-margin_bottom = 463.0
+margin_left = 220.0
+margin_top = 60.0
+margin_right = 611.0
+margin_bottom = 451.0
 texture = ExtResource( 2 )
 
 [node name="Desc" type="Label" parent="Panel2/Title"]
 margin_left = 36.0
 margin_top = 487.0
-margin_right = 672.0
-margin_bottom = 759.0
+margin_right = 833.0
+margin_bottom = 897.0
 text = "Many planets are inhabited by sentient creatures. You will often have to defeat them in combat to retrieve relics. Gaining knowledge of them will help either fight or talk to them in future encounters. If you can befriend them, they may trade a relic for a quest."
 autowrap = true
 

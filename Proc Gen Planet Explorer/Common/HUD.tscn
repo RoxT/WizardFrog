@@ -9,10 +9,10 @@ layer = 3
 script = ExtResource( 3 )
 
 [node name="RollBox" parent="." instance=ExtResource( 2 )]
-margin_left = 1611.0
-margin_top = 22.0
-margin_right = 1884.0
-margin_bottom = 387.0
+margin_left = 1486.0
+margin_top = 19.0
+margin_right = 1890.0
+margin_bottom = 546.0
 
 [node name="Talk" type="Label" parent="."]
 margin_left = 502.0

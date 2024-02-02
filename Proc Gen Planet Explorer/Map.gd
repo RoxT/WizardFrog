@@ -76,7 +76,7 @@ func random_tile()->Tile:
 func move_player(pos:Vector2):
 	pos = pos.snapped(PE.TILE_SIZE)
 	player.position = pos
-	tile_map[pos].visited = true
+	tile_map[pos].visit()
 
 func _on_roll(outcome:String):
 	cursor = last_tile_clicked.rect_position

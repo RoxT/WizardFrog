@@ -1,9 +1,9 @@
 extends CanvasLayer
 
-onready var history := $History
 onready var wizard := $Portrait
 onready var audio_player := $AudioStreamPlayer
 const PATH := "res://%s"
+export(Resource) var foe_override
 
 var hud
 var foe:Scene
@@ -14,7 +14,7 @@ func _ready():
 		hud = load("res://Common/HUD.tscn").instance()
 		add_child(hud)
 	$Panel.modulate.a = 0.7
-	if foe == null: foe = load("res://Data/Scenes/Wizard.tres") as Scene
+	if foe == null: foe = foe_override as Scene
 	var err = hud.rollbox.connect("rolled", self, "on_rolled")
 	if err != OK: push_error("Error connecting " + str(err))
 	

@@ -9,9 +9,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 150.0
+margin_left = 36.0
 margin_top = 75.0
-margin_right = 1864.0
+margin_right = 1883.0
 margin_bottom = 1039.0
 theme = ExtResource( 2 )
 
@@ -23,10 +23,10 @@ margin_bottom = 780.0
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Panel"]
-margin_left = 832.0
-margin_top = 70.0
-margin_right = 1606.0
-margin_bottom = 858.0
+margin_left = 788.0
+margin_top = 45.0
+margin_right = 1803.0
+margin_bottom = 1028.0
 text = "Years ago your people's ancient relics were stolen. They were carried and traded all over the galaxy, many ending up on small settlements. Recent intelligence has pinointed many of them and your team is being dispersed to collect them. 
 
 These wild planets are home to deadly monsters and even deadlier warriors who will try and stop you from retrieving your lost relics. 

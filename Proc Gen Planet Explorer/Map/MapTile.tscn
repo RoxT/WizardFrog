@@ -1,9 +1,54 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Map/mountains.svg" type="Texture" id=2]
 [ext_resource path="res://Map/MapTile.gd" type="Script" id=3]
 [ext_resource path="res://Data/Tiles/Marshes.tres" type="Resource" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Fog"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.59, 0.59, 0.59, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Visited"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="MapTile" type="TextureButton" groups=["tile"]]
 margin_right = 128.0
@@ -28,5 +73,10 @@ text = "4"
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fog = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+anims/Visited = SubResource( 3 )
 
 [connection signal="pressed" from="." to="." method="_on_MapTile_pressed"]

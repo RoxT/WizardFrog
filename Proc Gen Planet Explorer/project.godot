@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Proc Gen Planet Explorer"
-run/main_scene="res://Map.tscn"
+run/main_scene="res://Story/YourMission.tscn"
 config/icon="res://Frog.webp"
 
 [autoload]

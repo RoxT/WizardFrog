@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Mountain.ogg-07dcf3b9f4ad21e504a1e35d12b42028.oggstr
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

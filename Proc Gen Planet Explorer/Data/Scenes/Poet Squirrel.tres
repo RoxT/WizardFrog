@@ -4,23 +4,23 @@
 
 [resource]
 script = ExtResource( 1 )
-title = "Snake"
-texture = "Chaoclypse/snake.webp"
-hp = 5
-hello = "A snake has seen you. ROLL to discover it's temperment towards you."
+title = "Poet Squirrel"
+texture = "Encounter/magic-squirrel.png"
+hp = 3
+hello = "A Squirrel has seen you. ROLL to discover it's temperment towards you."
 intro = [ "H", "C", "I", "W", "R", "O" ]
 scenes = {
 "1": {
 "options": [ "Leave" ],
-"talk": "The snake watches you"
+"talk": "The squirrel watches you with a wry smile"
 },
 "2": {
 "options": [ "Fight!" ],
-"talk": "The snake strikes!"
+"talk": "The squirrel starts speaking in tounges!"
 },
 "3": {
 "options": [ "Leave" ],
-"talk": "The snake is looking at something...."
+"talk": "The squirrel wants to join you"
 },
 "C": 1,
 "H": 3,

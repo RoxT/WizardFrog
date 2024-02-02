@@ -79,11 +79,11 @@ func move_player(pos:Vector2):
 	tile_map[pos].visit()
 
 func _on_roll(outcome:String):
-	cursor = last_tile_clicked.rect_position
-	rations -= last_tile_clicked.tile.rations
-	move_player(last_tile_clicked.rect_position)
-	last_tile_clicked.visited = true
-	$UI/Rations.text = str(rations)
+	if last_tile_clicked.visited:
+		_move_into_last_clicked()
+		return
+		
+	_move_into_last_clicked()
 	match outcome:
 		"Nothing": pass
 		"Discovery":
@@ -101,8 +101,21 @@ func _on_roll(outcome:String):
 		place_tile(pos + UP)
 	if !tile_map.has(pos + DOWN):
 		place_tile(pos + DOWN)
+		
+func _move_into_last_clicked():
+	cursor = last_tile_clicked.rect_position
+	rations -= last_tile_clicked.tile.rations
+	move_player(last_tile_clicked.rect_position)
+	last_tile_clicked.visited = true
+	$UI/Rations.text = str(rations)
+		
+func _on_Next_pressed(option:String):
+	match option:
+		"Visit": 
+			_on_scene_pressed(last_tile_clicked.scene)
 
 func _on_tile_clicked(tile:TextureButton):
+	rand.randomize()
 	if tile.rect_position.distance_to(player.position) != PE.TILE_SIZE.x:
 		ref_rect.editor_only = true
 		rollbox.actions = []
@@ -112,10 +125,20 @@ func _on_tile_clicked(tile:TextureButton):
 	ref_rect.rect_position = tile.rect_position
 	tile.select()
 	var data := tile.tile as Tile
-	rollbox.set_actions(data.load_outcomes())
-	$HUD/Talk.text = "Roll to spend " + str(data.rations) + " rations to move into tile."
-	$HUD/Talk.show()
 	last_tile_clicked = tile
+	
+	if tile.visited:
+		if tile.scene == null:
+			$HUD/Talk.text = "Tap Go to spend " + str(data.rations) + " rations to move into tile."
+			rollbox.set_as_go()
+		else:
+			$HUD/Talk.text = "Tap Go or Visit to spend " + str(data.rations) + " rations to move into tile."
+			hud.next.connect_options(self, ["Visit"])
+			rollbox.set_as_go()
+	else:
+		rollbox.set_actions(data.load_outcomes())
+		$HUD/Talk.text = "Roll to spend " + str(data.rations) + " rations to move into tile."
+	$HUD/Talk.show()
 	
 	
 func _on_scene_pressed(scene:Scene):

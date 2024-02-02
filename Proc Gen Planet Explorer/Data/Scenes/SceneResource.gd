@@ -4,7 +4,7 @@ export var title := "Foe"
 export var texture := "icon.png"
 export var hp := 1
 export var hello := "It sees you. Roll for temperment."
-export var intro := ["H", "C", "I", "W", "R", "O"]
+export(Dictionary) var intro = {roll = ["H", "C", "I", "W", "R", "O"] }
 export var scenes := {}
 export var sound := "quiet_frogs.ogg"
 const SCENES_FOLDER := "res://Data/Scenes/"
@@ -17,7 +17,7 @@ const DISCOVERIES_FOLDER := "res://Data/Scenes/Discoveries/"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_title="Foe", new_texture="icon.png", new_hp=1, new_hello="It sees you. Roll for temperment.", new_intro=["H", "C", "I", "W", "R", "O"], new_scenes={}, new_sound=""):
+func _init(new_title="Foe", new_texture="icon.png", new_hp=1, new_hello="It sees you. Roll for temperment.", new_intro={roll=[]}, new_scenes={}, new_sound=""):
 	title = new_title
 	texture = new_texture
 	hp = new_hp

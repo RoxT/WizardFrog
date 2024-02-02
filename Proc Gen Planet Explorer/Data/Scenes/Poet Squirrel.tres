@@ -8,11 +8,13 @@ title = "Poet Squirrel"
 texture = "Encounter/magic-squirrel.png"
 hp = 3
 hello = "A Squirrel has seen you. ROLL to discover it's temperment towards you."
-intro = [ "H", "C", "I", "W", "R", "O" ]
+intro = {
+"roll": [ "H", "C", "I", "W", "R", "O" ]
+}
 scenes = {
 "1": {
 "options": [ "Leave" ],
-"talk": "The squirrel watches you with a wry smile"
+"talk": "The squirrel watches you with a wry smile."
 },
 "2": {
 "options": [ "Fight!" ],

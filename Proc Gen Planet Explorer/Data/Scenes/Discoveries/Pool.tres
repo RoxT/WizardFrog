@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Data/Scenes/SceneResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "Pool"
+texture = "Encounter/pool.jpg"
+hp = 1
+hello = "There is a shallow basin in the pool. Any character who drinks from it will recover one ability point."
+intro = {
+"options": [ "Drink", "Leave" ],
+"roll": [  ]
+}
+scenes = {
+}
+sound = "bubbly_waves.ogg"

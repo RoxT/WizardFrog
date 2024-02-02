@@ -8,7 +8,9 @@ title = "Park"
 texture = "Encounter/creepy_park.jpg"
 hp = 1
 hello = "A creepy Park"
-intro = [ "H", "C", "I", "W", "R", "O" ]
+intro = {
+"roll": [ "H", "C", "I", "W", "R", "O" ]
+}
 scenes = {
 "1": {
 "options": [ "Leave" ],

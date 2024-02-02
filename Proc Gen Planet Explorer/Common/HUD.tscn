@@ -17,7 +17,8 @@ margin_bottom = 546.0
 [node name="Talk" type="Label" parent="."]
 margin_left = 502.0
 margin_top = 808.0
-margin_right = 1379.0
-margin_bottom = 1002.0
+margin_right = 1491.0
+margin_bottom = 1050.0
+autowrap = true
 
 [node name="Next" parent="." instance=ExtResource( 1 )]

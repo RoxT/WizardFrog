@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var wizard := $Portrait
+onready var portrait := $Portrait
 onready var audio_player := $AudioStreamPlayer
 const PATH := "res://%s"
 export(Resource) var foe_override
@@ -13,15 +13,18 @@ func _ready():
 	if hud == null:
 		hud = load("res://Common/HUD.tscn").instance()
 		add_child(hud)
-	$Panel.modulate.a = 0.7
 	if foe == null: foe = foe_override as Scene
+	
+	$Panel.modulate.a = 0.7
 	var err = hud.rollbox.connect("rolled", self, "on_rolled")
 	if err != OK: push_error("Error connecting " + str(err))
 	
 	hud.talk.text = foe.hello
-	wizard.texture = foe.load_texture()
+	portrait.texture = foe.load_texture()
 	$Portrait/HP.text = "HP: " + str(foe.hp)
-	hud.rollbox.actions = foe.intro
+	hud.rollbox.actions = foe.intro.roll
+	if "options" in foe.intro:
+		hud.next.connect_options(self, foe.intro.options)
 	
 	var sound = foe.load_sound_or_null()
 	if sound != null:
@@ -39,9 +42,18 @@ func on_rolled(response:String):
 func _on_Next_pressed(option:String):
 	match option:
 		"Fight!": pass
+		"Drink":
+			#Characters recover
+			#Character flashes?
+			leave()
 		"Leave": 
-			hud.talk.text = ""
-			hud.next.destroy_options(self)
-			queue_free()
+			leave()
 		var scene:
 			on_rolled(scene)
+
+func leave():
+	hud.rollbox.empty_actions()
+	hud.talk.text = ""
+	hud.next.destroy_options()
+	queue_free()
+	

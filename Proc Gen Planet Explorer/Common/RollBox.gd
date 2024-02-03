@@ -14,6 +14,9 @@ func _ready():
 		for i in range(6):
 			label_list[i].text = actions[i]
 
+func set_no_roll():
+	$Roll.disabled = true
+
 func empty_actions():
 	for l in label_list:
 		l.text = ""

@@ -6,6 +6,7 @@ var scene:Scene
 
 # To Save
 var visited := false
+var hostile := false
 
 signal clicked(map_tile)
 

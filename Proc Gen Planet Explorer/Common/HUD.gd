@@ -10,6 +10,9 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func just_go():
+	rollbox.set_as_go()
+	
+func reset():
+	$Talk.text = ""
+	next.destroy_options()

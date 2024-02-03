@@ -64,9 +64,9 @@ anchor_top = 0.927
 anchor_right = 0.047
 anchor_bottom = 0.927
 margin_left = 3.984
-margin_top = -31.583
-margin_right = 22.984
-margin_bottom = 7.41699
+margin_top = -45.583
+margin_right = 26.984
+margin_bottom = 10.417
 text = "4"
 
 [node name="SceneTex" type="TextureRect" parent="."]

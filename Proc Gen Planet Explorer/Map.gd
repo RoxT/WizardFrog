@@ -112,9 +112,12 @@ func _move_into_last_clicked():
 func _on_Next_pressed(option:String):
 	match option:
 		"Visit": 
+			_move_into_last_clicked()
 			_on_scene_pressed(last_tile_clicked.scene)
 
 func _on_tile_clicked(tile:TextureButton):
+	hud.next.destroy_options()
+	hud.rollbox.set_no_roll()
 	rand.randomize()
 	if tile.rect_position.distance_to(player.position) != PE.TILE_SIZE.x:
 		ref_rect.editor_only = true
@@ -128,13 +131,13 @@ func _on_tile_clicked(tile:TextureButton):
 	last_tile_clicked = tile
 	
 	if tile.visited:
-		if tile.scene == null:
+		if tile.scene == null or tile.hostile:
 			$HUD/Talk.text = "Tap Go to spend " + str(data.rations) + " rations to move into tile."
-			rollbox.set_as_go()
+			hud.just_go()
 		else:
 			$HUD/Talk.text = "Tap Go or Visit to spend " + str(data.rations) + " rations to move into tile."
 			hud.next.connect_options(self, ["Visit"])
-			rollbox.set_as_go()
+			hud.just_go()
 	else:
 		rollbox.set_actions(data.load_outcomes())
 		$HUD/Talk.text = "Roll to spend " + str(data.rations) + " rations to move into tile."
@@ -146,4 +149,5 @@ func _on_scene_pressed(scene:Scene):
 	var battle = preload("res://Encounter/Encounter.tscn").instance()
 	battle.foe = scene
 	battle.hud = hud
+	battle.tile = last_tile_clicked
 	add_child(battle)

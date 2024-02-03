@@ -7,6 +7,7 @@ export(Resource) var foe_override
 
 var hud
 var foe:Scene
+var tile
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +15,7 @@ func _ready():
 		hud = load("res://Common/HUD.tscn").instance()
 		add_child(hud)
 	if foe == null: foe = foe_override as Scene
-	
+	hud.reset()
 	$Panel.modulate.a = 0.7
 	var err = hud.rollbox.connect("rolled", self, "on_rolled")
 	if err != OK: push_error("Error connecting " + str(err))
@@ -41,7 +42,9 @@ func on_rolled(response:String):
 
 func _on_Next_pressed(option:String):
 	match option:
-		"Fight!": pass
+		"Fight!": 
+			if tile: tile.hostile = true
+			leave()
 		"Drink":
 			#Characters recover
 			#Character flashes?

@@ -7,20 +7,26 @@ var rng := RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 
-func new_random_player(focus_name:String="Swordmaster"):
-	var focus := load(Focus.CHARACTERS_FOLDER + focus_name + ".tres") as Focus
-	var result = Player.new(focus)
+func new_random_player():
+	var result = Player.new()
+	result.randomize()
 	#To save
 	return result
 	
 func load_foe(title:String)->Scene:
 	return load("res://Data/Scenes/%s.tres" % title) as Scene
 
+func get_random_focus()->Focus:
+	return get_random(Focus, Focus.CHARACTERS_FOLDER) as Focus
+
 func get_random_settlement()->Tile:
-	var DIRECTORY_PATH := "res://Data/Tiles/Settlements/"
+	return get_random(Tile, Tile.CITIES_FOLDER) as Tile
+	
+func get_random(type, folder:String):
+	var DIRECTORY_PATH := folder
 	var directory := Directory.new()
 	if directory.open(DIRECTORY_PATH) != OK:
-		return null
+		return []
 
 	var resources := []
 
@@ -30,12 +36,12 @@ func get_random_settlement()->Tile:
 	while filename != "":
 		if filename.ends_with(".tres"):
 			var resource: Resource = load(DIRECTORY_PATH.plus_file(filename))
-			if not (resource is Tile):
+			if not (typeof(resource) == typeof(type)):
 				continue
 			resources.append(resource)
 		filename = directory.get_next()
 	directory.list_dir_end()
-	return resources[randi() % resources.size()]
+	return resources[rng.randi() % resources.size()]
 	
 
 func get_all_tiles()->Dictionary:

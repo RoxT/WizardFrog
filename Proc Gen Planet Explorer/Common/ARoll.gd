@@ -4,6 +4,7 @@ export(Array) var options = []
 #Actions
 const FIGHT := "Fight!"
 const LEAVE := "Leave"
+const DRINK := "Drink"
 #export(Resource) var sub_resource
 #export(Array, String) var strings
 

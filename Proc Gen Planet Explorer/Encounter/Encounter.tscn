@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Encounter/Encounter.gd" type="Script" id=2]
 [ext_resource path="res://Data/Scenes/Poet Squirrel.tres" type="Resource" id=3]
-[ext_resource path="res://Common/ChoicesBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Common/Scenes/ChoicesBox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.231373, 0.207843, 0.258824, 1 )

@@ -79,6 +79,11 @@ func move_player(pos:Vector2):
 	tile_map[pos].visit()
 
 func _on_roll(outcome:String):
+	var battle = get_node_or_null("Encounter")
+	if battle != null:
+		battle._on_Next_pressed(outcome)
+		return
+
 	if last_tile_clicked.visited:
 		_move_into_last_clicked()
 		return
@@ -110,10 +115,14 @@ func _move_into_last_clicked():
 	$UI/Rations.text = str(rations)
 		
 func _on_Next_pressed(option:String):
-	match option:
-		"Visit": 
-			_move_into_last_clicked()
-			_on_scene_pressed(last_tile_clicked.scene)
+	var battle = get_node_or_null("Encounter")
+	if battle != null:
+		battle._on_Next_pressed(option)
+	else:
+		match option:
+			"Visit": 
+				_move_into_last_clicked()
+				_on_scene_pressed(last_tile_clicked.scene)
 
 func _on_tile_clicked(tile:TextureButton):
 	hud.next.destroy_options()

@@ -3,7 +3,7 @@ extends Resource
 export(int) var max_hp
 export(int) var hp
 export(String) var title
-export(Resource) var focus
+export(Resource) var focus = Focus.new()
 export(int) var max_str_
 export(int) var max_dex
 export(int) var max_wil
@@ -13,7 +13,7 @@ export(int) var wil
 export(int) var arm
 export(int) var id
 var rng :RandomNumberGenerator
-var weapon
+export(Resource) var weapon = Weapon.new()
 
 #export(Resource) var sub_resource
 #export(Array, String) var strings
@@ -23,7 +23,7 @@ const NAMES := ["Jules", "Glorbo", "Gneissi", "Darla"]
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
 func _init(
-	new_focus=Focus.new(), new_max_hp=5, new_title="NA", new_arm=0, new_weapon="NA"):
+		new_focus=Focus.new(), new_max_hp=5, new_title="NA", new_arm=0, new_weapon=Weapon.new()):
 	max_hp = new_max_hp
 	hp = new_max_hp
 	title = new_title
@@ -41,7 +41,7 @@ func _init(
 	
 func randomize():
 	focus = PE.get_random_focus() as Focus
-	weapon = focus.default_weapon
+	weapon = load(Weapon.WEAPONS_FOLDER + focus.default_weapon + ".tres")
 	max_hp=roll_3d6()
 	title=NAMES[rng.randi()%NAMES.size()]
 	var rolls := roll_3d6_array()

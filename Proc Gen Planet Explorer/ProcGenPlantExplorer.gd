@@ -12,7 +12,7 @@ func new_random_player():
 	result.randomize()
 	#To save
 	return result
-	
+
 func load_foe(title:String)->Scene:
 	return load("res://Data/Scenes/%s.tres" % title) as Scene
 

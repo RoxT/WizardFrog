@@ -7,6 +7,7 @@ onready var hp := $State/HP
 onready var def := $State/DEF
 onready var focus := $Focus
 onready var name_l := $Name
+onready var weapon_l := $Weapon
 
 var player:Player
 
@@ -15,6 +16,7 @@ func _ready():
 	if player == null: player = PE.new_random_player()
 	name_l.text = player.title
 	focus.text = player.focus.title
+	weapon_l.text = player.weapon.title
 	
 	str_.text = player.stat_to_string("str_")
 	dex.text = player.stat_to_string("dex")

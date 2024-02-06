@@ -8,17 +8,17 @@ export(Resource) var foe_override
 var hud
 var foe:Scene
 var tile
+var fighting = false #Connect to other variable?
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if hud == null:
+	if hud == null: #Debug Mode
 		hud = load("res://Common/Scenes/HUD.tscn").instance()
 		add_child(hud)
+		hud.connect_me(self)
 	if foe == null: foe = foe_override as Scene
 	hud.reset()
 	$Panel.modulate.a = 0.7
-	var err = hud.rollbox.connect("rolled", self, "on_rolled")
-	if err != OK: push_error("Error connecting " + str(err))
 	
 	hud.talk.text = foe.hello
 	portrait.texture = foe.load_texture()
@@ -32,19 +32,34 @@ func _ready():
 		audio_player.stream = sound
 		audio_player.play()
 
-func on_rolled(response:String):
+#Passed from Map
+func _on_rolled(roll:String):
 	$Panel.modulate.a = 1
-	var next_scene = foe.scenes[response]
-	if !(next_scene is Dictionary):
-		next_scene = foe.scenes[next_scene as String]
-	hud.talk.text = next_scene.talk
-	hud.next.connect_options(self, next_scene.options)
+	if fighting:
+		foe.hp -= int(roll)
+		$Portrait/HP.text = str(foe.hp)
+		if foe.hp > 0:
+			hud.talk.text = "You hit for " + roll + "! Roll to hit again."
+		else:
+			hud.talk.text = "You hit for " + roll + " and destroyed the beast!"
+		return
+	else:
+		var next_scene = foe.scenes[roll]
+		if !(next_scene is Dictionary):
+			next_scene = foe.scenes[next_scene as String]
+		hud.talk.text = next_scene.talk
+		hud.next.connect_options(self, next_scene.options)
 
+#Passed from Map
 func _on_Next_pressed(option:String):
 	match option:
 		"Fight!": 
+			fighting = true
+			var player := hud.player_leaf.player as Player
 			if tile: tile.hostile = true
-			leave()
+			hud.talk.text = "Roll to swing your " + player.weapon.title + "."
+			hud.rollbox.actions = player.weapon.rolls
+			hud.next.connect_options(self, ["Leave"])
 		"Drink":
 			#Characters recover
 			#Character flashes?
@@ -52,7 +67,7 @@ func _on_Next_pressed(option:String):
 		"Leave": 
 			leave()
 		var scene:
-			on_rolled(scene)
+			_on_rolled(scene)
 
 func leave():
 	hud.rollbox.empty_actions()

@@ -6,7 +6,7 @@
 script = ExtResource( 1 )
 title = "Poet Squirrel"
 texture = "Encounter/magic-squirrel.png"
-hp = 3
+hp = 13
 hello = "A Squirrel has seen you. ROLL to discover it's temperment towards you."
 intro = {
 "roll": [ "H", "C", "I", "W", "R", "O" ]
@@ -18,7 +18,7 @@ scenes = {
 },
 "2": {
 "options": [ "Fight!" ],
-"talk": "The squirrel starts speaking in tounges!"
+"talk": "The squirrel starts speaking in tongues!"
 },
 "3": {
 "options": [ "Leave" ],

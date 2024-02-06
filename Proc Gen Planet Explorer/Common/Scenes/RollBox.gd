@@ -46,7 +46,7 @@ func set_actions(value:Array):
 			"W": t = "Wary"
 			"R": t = "Rude"
 			"O": t = "Hostile"
-			var other: t = other
+			var other: t = str(other)
 		label_list[i].text = t
 	
 
@@ -55,4 +55,4 @@ func _on_Roll_pressed():
 	for label in label_list:
 		label.remove_stylebox_override("normal")
 	label_list[result].add_stylebox_override("normal", StyleBoxFlat.new())
-	emit_signal("rolled", actions[result])
+	emit_signal("rolled", str(actions[result]))

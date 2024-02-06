@@ -9,76 +9,66 @@ func _ready():
 	parse_map_tiles()
 	parse_cities()
 	parse_focuses()
+	parse_weapons()
+
+func parse_weapons():
+	for w in open_file_to_var(Weapon.WEAPONS_JSON):
+		var new = Weapon.new()
+		new.parse(w)
+		proof(new)
+		
+func proof(thing):
+	if thing.get("texture") != null:
+		var tex := TextureRect.new()
+		tex.texture = thing.load_texture()
+		$ScrollContainer/HFlowContainer.add_child(tex)
+	else:
+		var tex := Label.new()
+		tex.text = thing.title
+		$ScrollContainer/HFlowContainer.add_child(tex)
+
+func open_file_to_var(filename:String)->Array:
+	var file := File.new()
+	var err = file.open(filename, File.READ)
+	if err != OK: push_error("Error opening file " + str(err))
+	var values := str2var(file.get_as_text()) as Array
+	file.close()
+	return values
 
 func parse_focuses():
-	var file := File.new()
-	var err = file.open(Focus.FOCUSES_JSON, File.READ)
-	if err != OK: push_error("Error opening file " + str(err))
-	var scenes:Array = str2var(file.get_as_text())
+	var scenes:Array = open_file_to_var(Focus.FOCUSES_JSON)
 	for s in scenes:
 		var new = Focus.new()
 		new.parse(s)
-		var tex := Label.new()
-		tex.text = new.title
-		$HFlowContainer.add_child(tex)
-		print(str(new))
-	file.close()	
+		proof(new)
 
 func parse_discoveries():
-	var file := File.new()
-	var err := file.open(Scene.DISCOVERIES_JSON, File.READ)
-	if err != OK: push_error("Error opening file " + str(err))
-	var scenes:Array = str2var(file.get_as_text())
+	var scenes:Array = open_file_to_var(Scene.DISCOVERIES_JSON)
 	for s in scenes:
 		var new = Scene.new()
 		new.parse(s, Scene.DISCOVERIES_FOLDER)
-		var tex := TextureRect.new()
-		tex.texture = new.load_texture()
-		$HFlowContainer.add_child(tex)
-		print(str(new))
-	file.close()
+		proof(new)
 
 func parse_cities():
-	var file := File.new()
-	var err = file.open(Tile.CITIES_JSON, File.READ)
-	if err != OK: push_error("Error opening file " + str(err))
-	var scenes:Array = str2var(file.get_as_text())
+	var scenes:Array = open_file_to_var(Tile.CITIES_JSON)
 	for s in scenes:
 		var new = Tile.new()
 		new.parse(s, Tile.CITIES_FOLDER)
-		var tex := TextureRect.new()
-		tex.texture = new.load_texture()
-		$HFlowContainer.add_child(tex)
-		print(str(new))
-	file.close()	
+		proof(new)
 	
 func parse_scenes():
-	var file := File.new()
-	var err := file.open(Scene.SCENES_JSON, File.READ)
-	if err != OK: push_error("Error opening file " + str(err))
-	var scenes:Array = str2var(file.get_as_text())
+	var scenes:Array = open_file_to_var(Scene.SCENES_JSON)
 	for s in scenes:
 		var new = Scene.new()
 		new.parse(s, Scene.SCENES_FOLDER)
-		var tex := TextureRect.new()
-		tex.texture = new.load_texture()
-		$HFlowContainer.add_child(tex)
-		print(str(new))
-	file.close()
+		proof(new)
 
 func parse_map_tiles():
-	var file := File.new()
-	var err = file.open(Tile.TILES_JSON, File.READ)
-	if err != OK: push_error("Error opening file " + str(err))
-	var scenes:Array = str2var(file.get_as_text())
+	var scenes:Array = open_file_to_var(Tile.TILES_JSON)
 	for s in scenes:
 		var new = Tile.new()
 		new.parse(s, Tile.TILES_FOLDER)
-		var tex := TextureRect.new()
-		tex.texture = new.load_texture()
-		$HFlowContainer.add_child(tex)
-		print(str(new))
-	file.close()	
+		proof(new)
 
 func load_scene(file_path: String) -> void:
 	var file := File.new()

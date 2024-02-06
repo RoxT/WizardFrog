@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 title = "Snake"
-texture = "Chaoclypse/snake.webp"
+texture = "Encounter/snake.png"
 hp = 5
 hello = "A snake has seen you. ROLL to discover it's temperment towards you."
 intro = {

@@ -8,3 +8,4 @@ title = "Sneak"
 stats = [ "dex", "str_", "wil" ]
 nat_arm = 2
 ability = "Can avoid others."
+default_weapon = "Dagger"

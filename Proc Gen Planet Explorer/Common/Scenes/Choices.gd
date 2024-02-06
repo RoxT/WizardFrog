@@ -22,6 +22,6 @@ func connect_options(target:Node, options:Array):
 func destroy_options():
 	for b in get_children():
 		b = b as Button
-		if b.is_connected("pressed", last_target, "_on_Next_pressed"):
+		if last_target and b.is_connected("pressed", last_target, "_on_Next_pressed"):
 			b.disconnect("pressed", last_target, "_on_Next_pressed")
 		b.queue_free()

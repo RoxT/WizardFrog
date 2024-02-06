@@ -8,3 +8,4 @@ title = "Poet"
 stats = [ "wil", "dex", "str_" ]
 nat_arm = 1
 ability = "Knows the names of things - replaces 'Hostile' with 'Friendly'."
+default_weapon = "Staff"

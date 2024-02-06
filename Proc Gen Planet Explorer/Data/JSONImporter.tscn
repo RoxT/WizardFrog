@@ -14,6 +14,9 @@ script = ExtResource( 1 )
 position = Vector2( 547, 439 )
 texture = ExtResource( 2 )
 
-[node name="HFlowContainer" type="HFlowContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="HFlowContainer" type="GridContainer" parent="ScrollContainer"]
+columns = 3

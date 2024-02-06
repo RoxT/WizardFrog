@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Data/Characters/Weapons/WeaponResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "Sword"
+rolls = [ 1, 2, 3, 4, 5, 6 ]
+average = 4.08333

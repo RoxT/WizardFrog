@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Data/Characters/Weapons/WeaponResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "Mace"
+rolls = [ 0, 2, 4, 6, 8, 10 ]
+average = 5.58333

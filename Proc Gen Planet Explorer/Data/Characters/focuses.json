@@ -1,14 +1,14 @@
 [
     {
-        "title": "Swordmaster", "stats": ["str_", "dex", "wil"], "nat_arm": 3, "ability": "Wields any weapon. High natural armour."
+        "title": "Swordmaster", "stats": ["str_", "dex", "wil"], "nat_arm": 3, "ability": "Wields any weapon. High natural armour.", "default_weapon": "Sword"
     },
     {
-        "title": "Poet", "stats": ["wil", "dex", "str_"], "nat_arm": 1, "ability": "Knows the names of things - replaces 'Hostile' with 'Friendly'."
+        "title": "Poet", "stats": ["wil", "dex", "str_"], "nat_arm": 1, "ability": "Knows the names of things - replaces 'Hostile' with 'Friendly'.", "default_weapon": "Staff"
     },
     {
-        "title": "Sneak", "stats": ["dex", "str_", "wil"], "nat_arm": 2, "ability": "Can avoid others."
+        "title": "Sneak", "stats": ["dex", "str_", "wil"], "nat_arm": 2, "ability": "Can avoid others.", "default_weapon": "Dagger"
     },
     {
-        "title": "Ecologist", "stats": ["dex", "wil", "str_"], "nat_arm": 1, "ability": "Reduces the amount of rations needed. Finds extra tiles."
+        "title": "Ecologist", "stats": ["dex", "wil", "str_"], "nat_arm": 1, "ability": "Reduces the amount of rations needed. Finds extra tiles.", "default_weapon": "Mace"
     }
 ]

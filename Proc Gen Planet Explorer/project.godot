@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "Tile",
 "language": "GDScript",
 "path": "res://Data/Tiles/TileResource.gd"
+}, {
+"base": "Resource",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Data/Characters/Weapons/WeaponResource.gd"
 } ]
 _global_script_class_icons={
 "ARoll": "",
@@ -45,7 +50,8 @@ _global_script_class_icons={
 "Player": "",
 "Quest": "",
 "Scene": "",
-"Tile": ""
+"Tile": "",
+"Weapon": ""
 }
 
 [application]

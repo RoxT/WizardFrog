@@ -12,7 +12,7 @@ var tile
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if hud == null:
-		hud = load("res://Common/HUD.tscn").instance()
+		hud = load("res://Common/Scenes/HUD.tscn").instance()
 		add_child(hud)
 	if foe == null: foe = foe_override as Scene
 	hud.reset()

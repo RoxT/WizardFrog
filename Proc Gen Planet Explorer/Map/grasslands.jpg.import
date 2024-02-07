@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/marshes.svg-d68114d4fd93a8594cd0b2285959e7d4.stex"
+path="res://.import/grasslands.jpg-fd0d81d572b47b9b99e3f2a7d31e065b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/marshes.svg"
-dest_files=[ "res://.import/marshes.svg-d68114d4fd93a8594cd0b2285959e7d4.stex" ]
+source_file="res://Map/grasslands.jpg"
+dest_files=[ "res://.import/grasslands.jpg-fd0d81d572b47b9b99e3f2a7d31e065b.stex" ]
 
 [params]
 

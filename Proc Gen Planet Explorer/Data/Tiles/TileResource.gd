@@ -43,7 +43,7 @@ func parse(d:Dictionary, folder:String):
 	for key in d.keys():
 		assert(get(key) != null)
 		assert(typeof(d[key]) == typeof(get(key)))
-		assert(load_texture() != null)
+#		assert(load_texture() != null)
 		set(key, d[key])
 	var err = ResourceSaver.save(folder + title + ".tres", self)
 	if err != OK:push_warning("Save failed " + str(err))

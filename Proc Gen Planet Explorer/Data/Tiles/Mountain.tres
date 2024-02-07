@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 title = "Mountain"
-texture = "mountains.svg"
+texture = "mountains.jpg"
 rations = 3
 has_water = false
 settlement = false

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mountains.svg-6c18915c6c7310d569e4dff2f7dc7276.stex"
+path="res://.import/marshes.svg-a0f57a65808f5843ff6f62aed5f1fdae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/mountains.svg"
-dest_files=[ "res://.import/mountains.svg-6c18915c6c7310d569e4dff2f7dc7276.stex" ]
+source_file="res://Map/archive/marshes.svg"
+dest_files=[ "res://.import/marshes.svg-a0f57a65808f5843ff6f62aed5f1fdae.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

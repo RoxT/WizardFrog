@@ -1,9 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Map/mountains.svg" type="Texture" id=2]
+[ext_resource path="res://Map/archive/mountains.svg" type="Texture" id=2]
 [ext_resource path="res://Map/MapTile.gd" type="Script" id=3]
 [ext_resource path="res://Data/Tiles/Marshes.tres" type="Resource" id=4]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fog"

@@ -6,8 +6,9 @@
 script = ExtResource( 1 )
 title = "Park"
 texture = "Encounter/creepy_park.jpg"
-hp = 1
+hp = -1
 hello = "A creepy Park"
+dmg = [  ]
 intro = {
 "roll": [ "H", "C", "I", "W", "R", "O" ]
 }

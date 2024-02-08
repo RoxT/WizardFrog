@@ -2,6 +2,7 @@
     {
         "title": "Park",
         "texture": "Encounter/creepy_park.jpg",
+        "hp": -1,
         "sound": "Mountain.ogg",
         "hello": "A creepy Park",
         "intro": {"roll": ["H", "C", "I", "W", "R", "O"] },
@@ -12,6 +13,7 @@
     {
         "title": "Pool",
         "texture": "Encounter/pool.jpg",
+        "hp": -1,
         "sound": "bubbly_waves.ogg",
         "hello": "There is a shallow basin in the pool. Any character who drinks from it will recover one ability point.",
         "intro": {"roll": [], "options": ["Drink", "Leave"]}
@@ -20,6 +22,7 @@
     {
         "title": "River Quarry",
         "texture": "Encounter/otter.jpg",
+        "hp": -1,
         "sound": "otter_eating.ogg",
         "hello": "A hungry otter greets you between mouthfuls of sea urchins.",
         "intro": {"roll": [], "options": ["What is this place?", "Mine", "Fish", "Leave"]},

@@ -2,7 +2,7 @@ extends TextureButton
 
 export(Resource) var tile_override
 var tile:Tile
-var scene:Scene
+var mob:Mob
 
 # To Save
 var visited := false
@@ -17,15 +17,15 @@ func _ready():
 	texture_normal = tile.load_texture()
 	hide_title()
 	_unclick(null)
-	change_scene(scene)
+	change_scene(mob)
 
-func change_scene(value:Scene):
-	scene = value
-	if scene == null:
+func change_scene(value:Mob):
+	mob = value
+	if mob == null:
 		$SceneTex.hide()
 	else:
 		$SceneTex.show()
-		var tex:Texture = scene.load_texture()
+		var tex:Texture = mob.load_texture()
 		$SceneTex.texture = tex
 		$SceneTex.rect_scale = PE.TILE_SIZE/tex.get_size()
 

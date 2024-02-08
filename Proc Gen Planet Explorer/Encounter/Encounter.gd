@@ -7,6 +7,7 @@ export(Resource) var foe_override
 
 var hud
 var foe:Scene
+var mob:Mob
 var tile
 var fighting = false #Connect to other variable?
 
@@ -16,7 +17,8 @@ func _ready():
 		hud = load("res://Common/Scenes/HUD.tscn").instance()
 		add_child(hud)
 		hud.connect_me(self)
-	if foe == null: foe = foe_override as Scene
+	if mob == null: 
+		mob = Mob.new(foe_override.title) as Mob
 	hud.reset()
 	$Panel.modulate.a = 0.7
 	

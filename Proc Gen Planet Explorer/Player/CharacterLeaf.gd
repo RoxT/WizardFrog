@@ -18,11 +18,11 @@ func _ready():
 	focus.text = player.focus.title
 	weapon_l.text = player.weapon.title
 	
-	str_.text = player.stat_to_string("str_")
-	dex.text = player.stat_to_string("dex")
-	wil.text = player.stat_to_string("wil")
+	str_.text = PE.stat_to_string("str_", player)
+	dex.text = PE.stat_to_string("dex", player)
+	wil.text = PE.stat_to_string("wil", player)
 	
-	hp.text = player.stat_to_string("hp")
+	hp.text = PE.stat_to_string("hp", player)
 	def.text = str(player.armour())
 
 

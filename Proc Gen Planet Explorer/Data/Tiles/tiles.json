@@ -1,14 +1,14 @@
 [
     {
-        "title":"Mountain", "texture": "mountains.svg", "rations": 3, "sound": "Mountain.ogg", 
+        "title":"Mountain", "texture": "mountains.jpg", "rations": 3, "sound": "Mountain.ogg", 
         "outcomes": ["Discovery", "Encounter", "Encounter"]
     },
     {
-        "title":"Grasslands", "texture": "grasslands.svg", "rations": 1, 
+        "title":"Grasslands", "texture": "grasslands.jpg", "rations": 1, 
         "outcomes": ["Discovery", "Encounter", "Encounter"]
     },
     {
-        "title":"Marshes", "texture": "marshes.svg", "rations": 2, "has_water": true, 
+        "title":"Marshes", "texture": "marshes.jpg", "rations": 2, "has_water": true, 
         "outcomes": ["Discovery", "Encounter", "Encounter"]
     }
 

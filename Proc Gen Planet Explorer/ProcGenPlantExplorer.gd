@@ -21,6 +21,13 @@ func get_random_focus()->Focus:
 
 func get_random_settlement()->Tile:
 	return get_random(Tile, Tile.CITIES_FOLDER) as Tile
+
+static func stat_to_string(stat:String, target:Resource)->String:
+	if target.get(stat) != target.get("max_" + stat):
+		var out_of:String = str(target.get("max_" + stat))
+		return str(target.get(stat)) + "/" + out_of
+	else:
+		return str(target.get(stat))
 	
 func get_random(type, folder:String):
 	var DIRECTORY_PATH := folder

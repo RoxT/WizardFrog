@@ -53,13 +53,6 @@ func randomize():
 	str_ = max_str_
 	dex = max_dex
 	wil = max_wil
-
-func stat_to_string(stat:String)->String:
-	if get(stat) != get("max_" + stat):
-		var out_of:String = str(get("max_" + stat))
-		return str(get(stat)) + "/" + out_of
-	else:
-		return str(get(stat))
 	
 func moved():
 	hp += max(round(max_hp/2), max_hp)

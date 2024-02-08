@@ -18,13 +18,15 @@ func _ready():
 		add_child(hud)
 		hud.connect_me(self)
 	if mob == null: 
-		mob = Mob.new(foe_override.title) as Mob
+		mob = Mob.new() as Mob
+		mob.scene = foe_override
+		foe = foe_override
 	hud.reset()
 	$Panel.modulate.a = 0.7
 	
 	hud.talk.text = foe.hello
 	portrait.texture = foe.load_texture()
-	$Portrait/HP.text = "HP: " + str(foe.hp)
+	draw_hp()
 	hud.rollbox.actions = foe.intro.roll
 	if "options" in foe.intro:
 		hud.next.connect_options(self, foe.intro.options)
@@ -34,12 +36,18 @@ func _ready():
 		audio_player.stream = sound
 		audio_player.play()
 
+func draw_hp():
+	if mob.hp > 0:
+		$Portrait/HP.text = str(mob.hp)
+	else:
+		$Portrait/HP.hide()
+		
 #Passed from Map
 func _on_rolled(roll:String):
 	$Panel.modulate.a = 1
 	if fighting:
-		foe.hp -= int(roll)
-		$Portrait/HP.text = str(foe.hp)
+		mob.hp -= int(roll)
+		draw_hp()
 		if foe.hp > 0:
 			hud.talk.text = "You hit for " + roll + "! Roll to hit again."
 		else:

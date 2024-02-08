@@ -16,5 +16,17 @@
         "hello": "There is a shallow basin in the pool. Any character who drinks from it will recover one ability point.",
         "intro": {"roll": [], "options": ["Drink", "Leave"]}
         
+    },
+    {
+        "title": "River Quarry",
+        "texture": "Encounter/otter.jpg",
+        "sound": "otter_eating.ogg",
+        "hello": "A hungry otter greets you between mouthfuls of sea urchins.",
+        "intro": {"roll": [], "options": ["What is this place?", "Mine", "Fish", "Leave"]},
+        "What is this place?": {"talk" : "\"This is where you can get anything you need.\" You look around and see deposits of glittering precious metals and some easy to catch shellfish (let's hope you can eat shellfish).",
+        "options": ["Mine", "Fish", "Leave"]},
+        "Mine": {"talk": "You collect some metals", "loot": {"what": "metal", "count": 5}, "options": ["Leave"]},
+        "Fish": {"talk": "You find some food", "loot": {"what": "rations", "count": 20}, "options": ["Leave"]}
+        
     }
 ]

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Data/Scenes/SceneResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "River Quarry"
+texture = "Encounter/otter.jpg"
+hp = 1
+hello = "A hungry otter greets you between mouthfuls of sea urchins."
+intro = {
+"options": [ "What is this place?", "Mine", "Fish", "Leave" ],
+"roll": [  ]
+}
+scenes = {
+"Fish": {
+"loot": {
+"count": 20,
+"what": "rations"
+},
+"options": [ "Leave" ],
+"talk": "You find some food"
+},
+"Mine": {
+"loot": {
+"count": 5,
+"what": "metal"
+},
+"options": [ "Leave" ],
+"talk": "You collect some metals"
+},
+"What is this place?": {
+"options": [ "Mine", "Fish", "Leave" ],
+"talk": "\"This is where you can get anything you need.\" You look around and see deposits of glittering precious metals and some easy to catch shellfish (let's hope you can eat shellfish)."
+}
+}
+sound = "otter_eating.ogg"

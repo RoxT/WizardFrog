@@ -4,12 +4,7 @@ export(int) var max_hp
 export(int) var hp
 export(String) var title
 export(Resource) var focus = Focus.new()
-export(int) var max_str_
-export(int) var max_dex
-export(int) var max_wil
-export(int) var str_
-export(int) var dex
-export(int) var wil
+export(Resource) var abl
 export(int) var arm
 export(int) var id
 var rng :RandomNumberGenerator
@@ -28,13 +23,8 @@ func _init(
 	hp = new_max_hp
 	title = new_title
 	focus = new_focus
-	max_str_ = 10
-	max_dex = 10
-	max_wil = 10
-	str_ = max_str_
-	dex = max_dex
-	wil = max_wil
 	arm = new_arm
+	abl = Abl.new()
 	id = randi() #Increment during save
 	rng = PE.rng
 	weapon=new_weapon
@@ -48,11 +38,12 @@ func randomize():
 	rolls.sort()
 	var i := 2
 	for s in focus.stats:
-		set("max_"+ s, rolls[i])
+		abl.set("max_"+ s, rolls[i])
+		abl.set(s, rolls[i])
 		i -= 1
-	str_ = max_str_
-	dex = max_dex
-	wil = max_wil
+	
+func heal_ability():
+	abl.heal()
 	
 func moved():
 	hp += max(round(max_hp/2), max_hp)
@@ -60,7 +51,7 @@ func moved():
 func hit_deadly(amount:int)->bool:
 	if hp-amount <0:
 		hp = 0
-		str_ += (hp-amount)
+		abl.str_ += (hp-amount)
 		return true
 	return false
 

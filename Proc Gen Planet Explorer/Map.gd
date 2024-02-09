@@ -48,15 +48,15 @@ func _ready():
 
 func place_foe(tile:Control):
 	var foe_i := rand.randi()%foes.size()
-	var foe := foes[foe_i] as Scene
-	tile.change_scene(foe)
-	_on_scene_pressed(foe)
+	var mob := Mob.new(foes[foe_i] as Scene)
+	tile.set_mob(mob)
+	_on_scene_pressed(mob)
 
 func place_discovery(tile:Control):
 	var place_i := rand.randi()%places.size()
-	var place := places[place_i] as Scene
-	tile.change_scene(place)
-	_on_scene_pressed(place)
+	var mob := Mob.new(places[place_i] as Scene)
+	tile.set_mob(mob)
+	_on_scene_pressed(mob)
 
 func place_tile(pos:Vector2, to_place:Tile=random_tile()):
 	if pos.snapped(PE.TILE_SIZE) in tile_map:
@@ -122,7 +122,7 @@ func _on_Next_pressed(option:String):
 		match option:
 			"Visit": 
 				_move_into_last_clicked()
-				_on_scene_pressed(last_tile_clicked.scene)
+				_on_scene_pressed(last_tile_clicked.mob)
 
 func _on_tile_clicked(tile:TextureButton):
 	hud.next.destroy_options()
@@ -140,7 +140,7 @@ func _on_tile_clicked(tile:TextureButton):
 	last_tile_clicked = tile
 	
 	if tile.visited:
-		if tile.scene == null or tile.hostile:
+		if tile.mob == null or tile.hostile:
 			$HUD/Talk.text = "Tap Go to spend " + str(data.rations) + " rations to move into tile."
 			hud.just_go()
 		else:
@@ -152,11 +152,9 @@ func _on_tile_clicked(tile:TextureButton):
 		$HUD/Talk.text = "Roll to spend " + str(data.rations) + " rations to move into tile."
 	$HUD/Talk.show()
 	
-	
-func _on_scene_pressed(scene:Scene):
-	print(scene.title)
+func _on_scene_pressed(mob:Mob):
+	print(mob.title())
 	var battle = preload("res://Encounter/Encounter.tscn").instance()
-	battle.foe = scene
 	battle.hud = hud
 	battle.tile = last_tile_clicked
 	add_child(battle)

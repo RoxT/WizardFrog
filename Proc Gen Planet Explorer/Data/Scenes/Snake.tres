@@ -7,6 +7,9 @@ script = ExtResource( 1 )
 title = "Snake"
 texture = "Encounter/snake.png"
 hp = 5
+dex = 10
+str_ = 10
+wil = 10
 hello = "A snake has seen you. ROLL to discover it's temperment towards you."
 dmg = [ 1, 1, 2, 2, 3, 3 ]
 intro = {
@@ -26,10 +29,12 @@ scenes = {
 "talk": "The snake is looking at something...."
 },
 "C": 1,
+"Dex": 15,
 "H": 3,
 "I": 1,
 "O": 2,
 "R": 2,
-"W": 2
+"W": 2,
+"Wil": 10
 }
 sound = ""

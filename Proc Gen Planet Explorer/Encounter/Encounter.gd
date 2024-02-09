@@ -8,8 +8,10 @@ export(Resource) var foe_override
 var hud
 var foe:Scene
 var mob:Mob
-var tile
+var tile:Control
 var fighting = false #Connect to other variable?
+var turns := []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,10 +19,10 @@ func _ready():
 		hud = load("res://Common/Scenes/HUD.tscn").instance()
 		add_child(hud)
 		hud.connect_me(self)
-	if mob == null: 
-		mob = Mob.new() as Mob
-		mob.scene = foe_override
-		foe = foe_override
+		mob = Mob.new(foe_override) as Mob
+	else:
+		mob = tile.mob
+	foe = mob.scene
 	hud.reset()
 	$Panel.modulate.a = 0.7
 	
@@ -37,8 +39,8 @@ func _ready():
 		audio_player.play()
 
 func draw_hp():
-	if mob.hp > 0:
-		$Portrait/HP.text = str(mob.hp)
+	if mob.max_hp > 0:
+		$Portrait/HP.text = "Health: " + str(mob.hp)
 	else:
 		$Portrait/HP.hide()
 		
@@ -48,11 +50,13 @@ func _on_rolled(roll:String):
 	if fighting:
 		mob.hp -= int(roll)
 		draw_hp()
-		if foe.hp > 0:
+		if mob.hp > 0:
 			hud.talk.text = "You hit for " + roll + "! Roll to hit again."
 		else:
 			hud.talk.text = "You hit for " + roll + " and destroyed the beast!"
-		return
+			hud.next.connect_options(self, ["Leave"])
+			hud.no_roll()
+			if tile: tile.mob = null # Remove from save???
 	else:
 		var next_scene = foe.scenes[roll]
 		if !(next_scene is Dictionary):
@@ -69,12 +73,14 @@ func _on_Next_pressed(option:String):
 			if tile: tile.hostile = true
 			hud.talk.text = "Roll to swing your " + player.weapon.title + "."
 			hud.rollbox.actions = player.weapon.rolls
-			hud.next.connect_options(self, ["Leave"])
+			hud.next.connect_options(self, ["Flee"])
 		"Drink":
-			#Characters recover
+			hud.player_leaf.player.heal_ability()
 			#Character flashes?
 			leave()
 		"Leave": 
+			leave()
+		"Flee":
 			leave()
 		var scene:
 			_on_rolled(scene)

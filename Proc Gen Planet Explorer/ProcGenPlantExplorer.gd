@@ -1,6 +1,7 @@
 extends Node
 
 const TILE_SIZE := Vector2(128, 128)
+
 var rng := RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.

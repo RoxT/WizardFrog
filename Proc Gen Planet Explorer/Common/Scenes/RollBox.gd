@@ -27,6 +27,9 @@ func set_as_go():
 	$Roll.text = "Go"
 	$Roll.disabled = false
 
+func no_roll():
+	$Roll.disabled = true
+
 func set_actions(value:Array):
 	if not ready:
 		return

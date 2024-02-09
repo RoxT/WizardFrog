@@ -13,6 +13,9 @@ func _ready():
 
 func just_go():
 	rollbox.set_as_go()
+
+func no_roll():
+	rollbox.no_roll()
 	
 func reset():
 	$Talk.text = ""

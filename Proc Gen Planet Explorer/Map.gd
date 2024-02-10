@@ -7,10 +7,10 @@ onready var rollbox = hud.rollbox
 onready var player := $UI/Player
 onready var ref_rect := $UI/ReferenceRect
 onready var center := get_rect().get_center().snapped(PE.TILE_SIZE)
-onready var UP := Vector2.UP * PE.TILE_SIZE
-onready var DOWN := Vector2.DOWN * PE.TILE_SIZE
-onready var RIGHT := Vector2.RIGHT * PE.TILE_SIZE
-onready var LEFT := Vector2.LEFT * PE.TILE_SIZE
+onready var UP:Vector2 = Vector2.UP * PE.TILE_SIZE
+onready var DOWN:Vector2 = Vector2.DOWN * PE.TILE_SIZE
+onready var RIGHT:Vector2 = Vector2.RIGHT * PE.TILE_SIZE
+onready var LEFT:Vector2 = Vector2.LEFT * PE.TILE_SIZE
 var foes := []
 var places := []
 var possible_tiles := {}
@@ -86,6 +86,8 @@ func _on_roll(outcome:String):
 
 	if last_tile_clicked.visited:
 		_move_into_last_clicked()
+		if last_tile_clicked.hostile:
+			_on_scene_pressed(last_tile_clicked.mob)
 		return
 		
 	_move_into_last_clicked()

@@ -130,5 +130,3 @@ func get_all_foes()->Array:
 	directory.list_dir_end()
 
 	return resources
-
-

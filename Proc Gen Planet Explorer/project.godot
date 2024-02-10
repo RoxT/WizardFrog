@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://Common/AbilitiesResource.gd"
 }, {
 "base": "Resource",
+"class": "Combat",
+"language": "GDScript",
+"path": "res://Data/Combat.gd"
+}, {
+"base": "Resource",
 "class": "Focus",
 "language": "GDScript",
 "path": "res://Data/Characters/FocusResource.gd"
@@ -57,6 +62,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ARoll": "",
 "Abl": "",
+"Combat": "",
 "Focus": "",
 "Mob": "",
 "Player": "",

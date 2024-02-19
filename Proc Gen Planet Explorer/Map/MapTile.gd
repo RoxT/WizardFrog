@@ -15,8 +15,6 @@ func _ready():
 	visit(visited)
 	if tile == null: tile = tile_override
 	texture_normal = tile.load_texture()
-	hide_title()
-	_unclick(null)
 	set_mob(mob)
 
 func set_mob(value:Mob):
@@ -43,24 +41,12 @@ func visit(value=true):
 	else:
 		$AnimationPlayer.play("Fog")
 	
-func show_title():
-	$Label.text = str(tile.rations)
-	$Label.show()
-	
-func hide_title():
-	$Label.hide()
-	
 func _click():
 	emit_signal("clicked", self)
 	get_tree().call_group("tile", "_unclick", self)
 
-func select():
-	show_title()
-	
-
-func _unclick(map_tile):
-	if map_tile == null or map_tile != self:
-		hide_title()
+func select(frame:ReferenceRect):
+	frame.move(rect_position, tile.rations)
 
 
 func _on_MapTile_pressed():

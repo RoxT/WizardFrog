@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Map.gd" type="Script" id=1]
 [ext_resource path="res://Common/Scenes/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Map/Frame.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Sword.png" type="Texture" id=4]
 [ext_resource path="res://Player/bg.png" type="Texture" id=5]
 
@@ -39,11 +40,7 @@ show_behind_parent = true
 texture = ExtResource( 5 )
 offset = Vector2( 64, 64 )
 
-[node name="ReferenceRect" type="ReferenceRect" parent="UI"]
-margin_right = 128.0
-margin_bottom = 128.0
-mouse_filter = 2
-border_color = Color( 1, 1, 1, 1 )
-editor_only = false
-
 [node name="HUD" parent="." instance=ExtResource( 2 )]
+
+[node name="Frame" parent="HUD" instance=ExtResource( 3 )]
+visible = false

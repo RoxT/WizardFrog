@@ -1,11 +1,12 @@
 extends Control
 
+const MAPTILE:PackedScene = preload("res://Map/MapTile.tscn")
 onready var tiles_layer := $TilesLayer
 onready var foe_layer := $FoesLayer
 onready var hud := $HUD
 onready var rollbox = hud.rollbox
 onready var player := $UI/Player
-onready var ref_rect := $UI/ReferenceRect
+onready var frame := $HUD/Frame
 onready var center := get_rect().get_center().snapped(PE.TILE_SIZE)
 onready var UP:Vector2 = Vector2.UP * PE.TILE_SIZE
 onready var DOWN:Vector2 = Vector2.DOWN * PE.TILE_SIZE
@@ -43,7 +44,6 @@ func _ready():
 		place_tile(cursor)
 	var err = rollbox.connect("rolled", self, "_on_roll")
 	if err != OK: push_error("Can't connect rollbox " + str(err))
-	ref_rect.rect_position = center
 	print("----------------")
 
 func place_foe(tile:Control):
@@ -62,7 +62,7 @@ func place_tile(pos:Vector2, to_place:Tile=random_tile()):
 	if pos.snapped(PE.TILE_SIZE) in tile_map:
 		print("already at " + str(pos.snapped(PE.TILE_SIZE)))
 		return
-	var tile = preload("res://Map/MapTile.tscn").instance()
+	var tile = MAPTILE.instance()
 	tile.tile = to_place
 	tile_map[tile.place(pos.x, pos.y)] = tile
 	tile.connect("clicked", self, "_on_tile_clicked")
@@ -131,13 +131,11 @@ func _on_tile_clicked(tile:TextureButton):
 	hud.rollbox.set_no_roll()
 	rand.randomize()
 	if tile.rect_position.distance_to(player.position) != PE.TILE_SIZE.x:
-		ref_rect.editor_only = true
 		rollbox.actions = []
 		$HUD/Talk.text = "Choose a tile adjacent to you to move."
+		frame.hide()
 		return
-	ref_rect.editor_only = false
-	ref_rect.rect_position = tile.rect_position
-	tile.select()
+	tile.select(frame)
 	var data := tile.tile as Tile
 	last_tile_clicked = tile
 	

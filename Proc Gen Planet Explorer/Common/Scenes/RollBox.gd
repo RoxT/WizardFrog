@@ -1,7 +1,10 @@
 extends Panel
 
 export(Array, String) var actions setget set_actions
+const NEW_STYLEBOX:StyleBoxFlat = preload("res://Common/Scenes/new_styleboxflat.tres")
 onready var label_list := $ActionList.get_children()
+onready var animation_player := $AnimationPlayer
+onready var breath := $Breath
 var result:int = -1
 var ready := false
 
@@ -20,7 +23,7 @@ func set_no_roll():
 func empty_actions():
 	for l in label_list:
 		l.text = ""
-		l.remove_stylebox_override("normal")
+		un_highlight(l)
 
 func set_as_go():
 	empty_actions()
@@ -38,7 +41,7 @@ func set_actions(value:Array):
 	if value.size() == 0:
 		return
 	assert(value.size() == 6)
-	if result > -1: label_list[result].remove_stylebox_override("normal")
+	if result > -1: un_highlight(label_list[result])
 	actions = value
 	for i in range(6):
 		var t:String
@@ -54,8 +57,20 @@ func set_actions(value:Array):
 	
 
 func _on_Roll_pressed():
+	animation_player.play("roll")
+	set_no_roll()
+
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	result = randi() % 6
-	for label in label_list:
-		label.remove_stylebox_override("normal")
-	label_list[result].add_stylebox_override("normal", StyleBoxFlat.new())
+	highlight(label_list[result])
+	_on_Breath_timeout()
+	
+func _on_Breath_timeout():
 	emit_signal("rolled", str(actions[result]))
+
+func highlight(label:Label):
+	label.add_stylebox_override("normal", NEW_STYLEBOX)
+
+func un_highlight(label:Label):
+	label.remove_stylebox_override("normal")
+

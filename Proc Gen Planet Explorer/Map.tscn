@@ -40,7 +40,7 @@ show_behind_parent = true
 texture = ExtResource( 5 )
 offset = Vector2( 64, 64 )
 
-[node name="HUD" parent="." instance=ExtResource( 2 )]
-
-[node name="Frame" parent="HUD" instance=ExtResource( 3 )]
+[node name="Frame" parent="UI" instance=ExtResource( 3 )]
 visible = false
+
+[node name="HUD" parent="." instance=ExtResource( 2 )]

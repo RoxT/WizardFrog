@@ -1,11 +1,43 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Map/Frame.gd" type="Script" id=1]
 
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 14.42 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Frame" type="ReferenceRect"]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 128.0
 margin_bottom = 128.0
-mouse_filter = 2
+mouse_filter = 1
 border_color = Color( 1, 1, 1, 1 )
 border_width = 3.0
 editor_only = false
@@ -23,3 +55,9 @@ margin_bottom = 11.344
 text = "4"
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/fade_in = SubResource( 2 )
+
+[connection signal="gui_input" from="." to="." method="_on_Frame_gui_input"]

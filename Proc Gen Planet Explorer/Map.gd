@@ -1,12 +1,13 @@
 extends Control
 
 const MAPTILE:PackedScene = preload("res://Map/MapTile.tscn")
+const BATTLE_SCENE:PackedScene = preload("res://Encounter/Encounter.tscn")
 onready var tiles_layer := $TilesLayer
 onready var foe_layer := $FoesLayer
 onready var hud := $HUD
 onready var rollbox = hud.rollbox
 onready var player := $UI/Player
-onready var frame := $HUD/Frame
+onready var frame := $UI/Frame
 onready var center := get_rect().get_center().snapped(PE.TILE_SIZE)
 onready var UP:Vector2 = Vector2.UP * PE.TILE_SIZE
 onready var DOWN:Vector2 = Vector2.DOWN * PE.TILE_SIZE
@@ -42,9 +43,14 @@ func _ready():
 		place_tile(cursor)
 		cursor += [UP, DOWN, LEFT, RIGHT][rand.randi()%4]
 		place_tile(cursor)
-	var err = rollbox.connect("rolled", self, "_on_roll")
-	if err != OK: push_error("Can't connect rollbox " + str(err))
+	err(rollbox.connect("rolled", self, "_on_roll"))
+	err(frame.connect("frame_pressed", self, "_on_frame_pressed"))
+	frame.rect_position = player.position
 	print("----------------")
+	
+func err(err:int):
+	if err != OK:
+		push_warning("Error connecting:" + str(err))
 
 func place_foe(tile:Control):
 	var foe_i := rand.randi()%foes.size()
@@ -77,6 +83,9 @@ func move_player(pos:Vector2):
 	pos = pos.snapped(PE.TILE_SIZE)
 	player.position = pos
 	tile_map[pos].visit()
+
+func _on_frame_pressed():
+	rollbox._on_Roll_pressed()
 
 func _on_roll(outcome:String):
 	var battle = get_node_or_null("Encounter")
@@ -127,6 +136,7 @@ func _on_Next_pressed(option:String):
 				_on_scene_pressed(last_tile_clicked.mob)
 
 func _on_tile_clicked(tile:TextureButton):
+	
 	hud.next.destroy_options()
 	hud.rollbox.set_no_roll()
 	rand.randomize()
@@ -149,12 +159,12 @@ func _on_tile_clicked(tile:TextureButton):
 			hud.just_go()
 	else:
 		rollbox.set_actions(data.load_outcomes())
-		$HUD/Talk.text = "Roll to spend " + str(data.rations) + " rations to move into tile."
+		$HUD/Talk.text = "Tap tile again or 'Roll' to roll for encounter and spend " + str(data.rations) + " rations to move into tile."
 	$HUD/Talk.show()
 	
 func _on_scene_pressed(mob:Mob):
 	print(mob.title())
-	var battle = preload("res://Encounter/Encounter.tscn").instance()
+	var battle = BATTLE_SCENE.instance()
 	battle.hud = hud
 	battle.tile = last_tile_clicked
 	add_child(battle)

@@ -1,10 +1,8 @@
 extends Panel
 
 export(Array, String) var actions setget set_actions
-const NEW_STYLEBOX:StyleBoxFlat = preload("res://Common/Scenes/new_styleboxflat.tres")
 onready var label_list := $ActionList.get_children()
 onready var animation_player := $AnimationPlayer
-onready var breath := $Breath
 var result:int = -1
 var ready := false
 
@@ -13,6 +11,9 @@ signal rolled(action)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ready = true
+	for l in label_list:
+		var err = l.connect("highlight_finished", self, "_on_animate_highlight_finished")
+		if err != OK: push_warning("Error connecting " + str(err))
 	if actions.size() == 6:
 		for i in range(6):
 			label_list[i].text = actions[i]
@@ -23,7 +24,7 @@ func set_no_roll():
 func empty_actions():
 	for l in label_list:
 		l.text = ""
-		un_highlight(l)
+		l.un_highlight()
 
 func set_as_go():
 	empty_actions()
@@ -41,7 +42,7 @@ func set_actions(value:Array):
 	if value.size() == 0:
 		return
 	assert(value.size() == 6)
-	if result > -1: un_highlight(label_list[result])
+	if result > -1: label_list[result].un_highlight()
 	actions = value
 	for i in range(6):
 		var t:String
@@ -56,21 +57,15 @@ func set_actions(value:Array):
 		label_list[i].text = t
 	
 
+#Roll -> Animate Roll -> Animate Highlight
 func _on_Roll_pressed():
 	animation_player.play("roll")
 	set_no_roll()
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	result = randi() % 6
-	highlight(label_list[result])
-	_on_Breath_timeout()
+	label_list[result].animate_highlight()
 	
-func _on_Breath_timeout():
+func _on_animate_highlight_finished():
 	emit_signal("rolled", str(actions[result]))
-
-func highlight(label:Label):
-	label.add_stylebox_override("normal", NEW_STYLEBOX)
-
-func un_highlight(label:Label):
-	label.remove_stylebox_override("normal")
 

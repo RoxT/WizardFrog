@@ -136,7 +136,6 @@ func _on_Next_pressed(option:String):
 				_on_scene_pressed(last_tile_clicked.mob)
 
 func _on_tile_clicked(tile:TextureButton):
-	
 	hud.next.destroy_options()
 	hud.rollbox.set_no_roll()
 	rand.randomize()

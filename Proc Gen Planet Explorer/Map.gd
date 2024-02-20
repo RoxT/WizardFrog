@@ -46,6 +46,7 @@ func _ready():
 	err(rollbox.connect("rolled", self, "_on_roll"))
 	err(frame.connect("frame_pressed", self, "_on_frame_pressed"))
 	frame.rect_position = player.position
+	rollbox.no_roll()
 	print("----------------")
 	
 func err(err:int):

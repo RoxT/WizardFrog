@@ -9,9 +9,9 @@ var hud
 var scene:Scene
 var mob:Mob
 var tile:Control
-var fighting = false #Connect to other variable?
 var turns := []
-
+var turn_i := 0
+var mob_target
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,33 +47,53 @@ func draw_hp():
 #Passed from Map
 func _on_rolled(roll:String):
 	$Panel.modulate.a = 1
-	if fighting:
-		mob.combat.hp -= int(roll)
-		draw_hp()
-		if mob.combat.hp > 0:
-			hud.talk.text = "You hit for " + roll + "! Roll to hit again."
+	if !turns.empty():
+		hud.talk.text = ""
+		if turns[turn_i] is Player:
+			if int(roll) >= 0:
+				hud.talk.add_text("You hit for " + roll)
+				hud.talk.newline()
+				mob.combat.hp -= int(roll)
+				draw_hp()
+				if mob.combat.hp <= 0:
+					hud.talk.add_text("The beast is destroyed!")
+					hud.next.connect_options(self, ["Leave"])
+					hud.no_roll()
+					if tile: tile.mob = null # Remove from save???
+					return
 		else:
-			hud.talk.text = "You hit for " + roll + " and destroyed the beast!"
-			hud.next.connect_options(self, ["Leave"])
-			hud.no_roll()
-			if tile: tile.mob = null # Remove from save???
+			mob_target.hit_combat(int(roll))
+			hud.talk.text = "You were hit for %s."%roll
+		turn(turns[turn_i])
 	else:
 		var next_scene = scene.scenes[roll]
 		if !(next_scene is Dictionary):
 			next_scene = scene.scenes[next_scene as String]
 		hud.talk.text = next_scene.talk
 		hud.next.connect_options(self, next_scene.options)
+	
+		
+func turn(combatant):
+	turn_i = (turn_i + 1)%turns.size()
+	var combat:Combat = combatant.combat
+	if combatant is Player:
+		hud.talk.add_text("Roll to swing your %s." % combatant.weapon.title)
+		hud.rollbox.actions = combat.dmg
+		hud.next.connect_options(self, ["Flee"])
+	else:
+		hud.next.connect_options(self, ["Next"])
+		mob_target = hud.player_leaf
 
 #Passed from Map
 func _on_Next_pressed(option:String):
 	match option:
 		"Fight!": 
-			fighting = true
-			var player := hud.player_leaf.player as Player
+			turns = [hud.player_leaf.player, mob]
+			turns.sort_custom(Combat, "initiative")
 			if tile: tile.hostile = true
-			hud.talk.text = "Roll to swing your " + player.weapon.title + "."
-			hud.rollbox.actions = player.combat.dmg
+			_on_rolled("-1")
 			hud.next.connect_options(self, ["Flee"])
+			mob_target = hud.player_leaf
 		"Drink":
 			hud.player_leaf.player.combat.heal_ability()
 			#Character flashes?
@@ -91,4 +111,5 @@ func leave():
 	hud.talk.text = ""
 	hud.next.destroy_options()
 	queue_free()
+
 	

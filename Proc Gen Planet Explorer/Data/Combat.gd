@@ -20,7 +20,12 @@ func _init(new_max_hp=5, new_nat_arm=1, new_dmg=[1,2,3,4,5,6], new_abl=Abl.new()
 	
 func heal_ability():
 	abl.heal()
-	
+
+static func initiative(a, b)->bool:
+	if a.combat.abl.dex < b.combat.abl.dex:
+		return true
+	else: return false
+
 func hit_deadly(amount:int)->bool:
 	if hp-amount <0:
 		hp = 0
@@ -40,3 +45,5 @@ func armour()->int:
 func set_max_hp(value:int):
 	max_hp = value
 	hp = value
+	
+	

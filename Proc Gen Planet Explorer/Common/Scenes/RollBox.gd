@@ -60,7 +60,7 @@ func set_actions(value:Array):
 #Roll -> Animate Roll -> Animate Highlight
 func _on_Roll_pressed():
 	animation_player.play("roll")
-	set_no_roll()
+#	set_no_roll()
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	result = randi() % 6

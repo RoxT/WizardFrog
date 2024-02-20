@@ -17,12 +17,25 @@ func _ready():
 	name_l.text = player.title
 	focus.text = player.focus.title
 	weapon_l.text = player.weapon.title
+	draw()
 	
-	str_.text = PE.stat_to_string("str_", player)
-	dex.text = PE.stat_to_string("dex", player)
-	wil.text = PE.stat_to_string("wil", player)
+func draw():
+	str_.text = PE.stat_to_string("str_", player.combat.abl)
+	dex.text = PE.stat_to_string("dex", player.combat.abl)
+	wil.text = PE.stat_to_string("wil", player.combat.abl)
 	
-	hp.text = PE.stat_to_string("hp", player)
+	hp.text = PE.stat_to_string("hp", player.combat)
 	def.text = str(player.armour())
+	
+func dmg_array()->Array:
+	return player.combat.dmg
 
+func initiative()->int:
+	return player.combat.abl.dex
 
+func hit_deadly(amount:int):
+	player.combat.hit_deadly(amount)
+
+func hit_combat(amount:int):
+	player.combat.hit_combat(amount)
+	

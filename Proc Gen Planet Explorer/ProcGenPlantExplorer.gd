@@ -3,6 +3,7 @@ extends Node
 const TILE_SIZE := Vector2(128, 128)
 
 var rng := RandomNumberGenerator.new()
+const NAMES := ["Jules", "Glorbo", "Gneissi", "Darla"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,7 +11,17 @@ func _ready():
 
 func new_random_player():
 	var result = Player.new()
-	result.randomize()
+	result.focus = PE.get_random_focus() as Focus
+	title=NAMES[rng.randi()%NAMES.size()]
+	
+	var rolls := roll_3d6_array()
+	rolls.sort()
+	var i := 2
+	var abl = Abl.new()
+	for s in focus.stats:
+		abl.set("max_"+ s, rolls[i])
+		abl.set(s, rolls[i])
+		i -= 1
 	#To save
 	return result
 

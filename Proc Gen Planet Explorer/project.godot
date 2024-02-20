@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Combat",
 "language": "GDScript",
-"path": "res://Data/Combat.gd"
+"path": "res://Encounter/Combat/Combat.gd"
 }, {
 "base": "Resource",
 "class": "Focus",
@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Mob",
 "language": "GDScript",
-"path": "res://Encounter/MobResource.gd"
+"path": "res://Encounter/Combat/MobResource.gd"
 }, {
 "base": "Resource",
 "class": "Player",

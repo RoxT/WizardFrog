@@ -9,7 +9,8 @@ onready var focus := $Focus
 onready var name_l := $Name
 onready var weapon_l := $Weapon
 
-var player:Player
+var combat:Combat = Combat.new()
+export(Resource) var player = Player.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,22 +21,29 @@ func _ready():
 	draw()
 	
 func draw():
-	str_.text = PE.stat_to_string("str_", player.combat.abl)
-	dex.text = PE.stat_to_string("dex", player.combat.abl)
-	wil.text = PE.stat_to_string("wil", player.combat.abl)
+	str_.text = PE.stat_to_string("str_", combat.abl)
+	dex.text = PE.stat_to_string("dex", combat.abl)
+	wil.text = PE.stat_to_string("wil", combat.abl)
 	
-	hp.text = PE.stat_to_string("hp", player.combat)
-	def.text = str(player.armour())
+	hp.text = PE.stat_to_string("hp", combat)
+	def.text = str(armour())
 	
 func dmg_array()->Array:
-	return player.combat.dmg
+	return combat.dmg
 
 func initiative()->int:
-	return player.combat.abl.dex
+	return combat.abl.dex
 
 func hit_deadly(amount:int):
-	player.combat.hit_deadly(amount)
+	combat.hit_deadly(amount)
 
 func hit_combat(amount:int):
-	player.combat.hit_combat(amount)
+	combat.hit_combat(amount)
+	
+func moved():
+	combat.hp += max(round(combat.max_hp/2), combat.max_hp)
+	
+
+func armour()->int:
+	return combat.arm + player.focus.nat_arm
 	

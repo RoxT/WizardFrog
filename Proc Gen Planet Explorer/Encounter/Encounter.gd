@@ -37,6 +37,7 @@ func _ready():
 	if sound != null:
 		audio_player.stream = sound
 		audio_player.play()
+	
 
 func draw_hp():
 	if mob.has_combat():
@@ -88,6 +89,7 @@ func turn(combatant):
 func _on_Next_pressed(option:String):
 	match option:
 		"Fight!": 
+			$TurnManager.combatants = [scene, hud.get_player()]
 			turns = [hud.player_leaf.player, mob]
 			turns.sort_custom(Combat, "initiative")
 			if tile: tile.hostile = true

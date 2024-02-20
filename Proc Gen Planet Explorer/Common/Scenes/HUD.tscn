@@ -28,6 +28,7 @@ margin_right = 1889.0
 margin_bottom = 1117.0
 
 [node name="CharacterLeaf" parent="." instance=ExtResource( 4 )]
+visible = false
 margin_left = 14.0
 margin_top = 17.0
 margin_right = -1662.0

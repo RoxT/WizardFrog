@@ -24,12 +24,15 @@ func _init(new_str_=10, new_dex=10, new_wil=10):
 	max_str_ = new_str_
 	max_dex = new_dex
 	max_wil = new_wil
+	
+func mod(skill:String)->int:
+	return int(max(0, int(get(skill)/3.0)))
 
 func scene(source:Scene):
 	for s in SKILL_LIST:
 		set("max_"+s, source[s])
 		set(s, source[s])
-
+		
 func heal():
 	for a in SKILL_LIST:
 		if get(a) < get("max_" + a):

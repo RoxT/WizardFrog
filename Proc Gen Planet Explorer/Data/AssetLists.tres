@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Data/AssetLists.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+focuses = [ "Swordmaster", "Poet", "Sneak", "Ecologist" ]
+weapons = [ "Sword", "Mace", "Dagger", "Staff" ]
+scenes = [ "Wizard", "Snake", "Poet Squirrel" ]
+discoveries = [ "Park", "Pool", "River Quarry" ]
+cities = [ "Observatory" ]
+tiles = [ "Mountain", "Grasslands", "Marshes" ]

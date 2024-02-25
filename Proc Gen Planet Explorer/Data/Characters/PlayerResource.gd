@@ -30,11 +30,11 @@ func randomize():
 	
 
 	
-func roll_3d6()->int:
-	return rng.randi()%6 + rng.randi()%6 + rng.randi()%6
+static func roll_3d6()->int:
+	return randi()%6 + randi()%6 + randi()%6
 
 	
-func roll_3d6_array()->Array:
+static func roll_3d6_array()->Array:
 	var results := []
 	results.append(roll_3d6())
 	results.append(roll_3d6())

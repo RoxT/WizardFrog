@@ -1,20 +1,26 @@
 extends Control
 
+const ASSET_LISTS := preload("res://Data/AssetLists.gd")
+var lists
 
 var _scene_data:Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	lists = ASSET_LISTS.new()
 	parse_scenes()
 	parse_discoveries()
 	parse_map_tiles()
 	parse_cities()
 	parse_focuses()
 	parse_weapons()
+	lists.save()
 
 func parse_weapons():
+	lists.weapons = []
 	for w in open_file_to_var(Weapon.WEAPONS_JSON):
 		var new = Weapon.new()
 		new.parse(w)
+		lists.weapons.append(new.title)
 		proof(new)
 		
 func proof(thing):
@@ -37,37 +43,47 @@ func open_file_to_var(filename:String)->Array:
 
 func parse_focuses():
 	var scenes:Array = open_file_to_var(Focus.FOCUSES_JSON)
+	lists.focuses = []
 	for s in scenes:
 		var new = Focus.new()
 		new.parse(s)
+		lists.focuses.append(new.title)
 		proof(new)
 
 func parse_discoveries():
 	var scenes:Array = open_file_to_var(Scene.DISCOVERIES_JSON)
+	lists.discoveries = []
 	for s in scenes:
 		var new = Scene.new()
 		new.parse(s, Scene.DISCOVERIES_FOLDER)
+		lists.discoveries.append(new.title)
 		proof(new)
 
 func parse_cities():
 	var scenes:Array = open_file_to_var(Tile.CITIES_JSON)
+	lists.cities = []
 	for s in scenes:
 		var new = Tile.new()
 		new.parse(s, Tile.CITIES_FOLDER)
+		lists.cities.append(new.title)
 		proof(new)
 	
 func parse_scenes():
 	var scenes:Array = open_file_to_var(Scene.SCENES_JSON)
+	lists.scenes = []
 	for s in scenes:
 		var new = Scene.new()
 		new.parse(s, Scene.SCENES_FOLDER)
+		lists.scenes.append(new.title)
 		proof(new)
 
 func parse_map_tiles():
 	var scenes:Array = open_file_to_var(Tile.TILES_JSON)
+	lists.tiles = []
 	for s in scenes:
 		var new = Tile.new()
 		new.parse(s, Tile.TILES_FOLDER)
+		lists.tiles.append(new.title)
 		proof(new)
 
 func load_scene(file_path: String) -> void:

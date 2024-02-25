@@ -14,7 +14,6 @@ onready var DOWN:Vector2 = Vector2.DOWN * PE.TILE_SIZE
 onready var RIGHT:Vector2 = Vector2.RIGHT * PE.TILE_SIZE
 onready var LEFT:Vector2 = Vector2.LEFT * PE.TILE_SIZE
 var foes := []
-var places := []
 var possible_tiles := {}
 var cursor:Vector2
 var rand := RandomNumberGenerator.new()
@@ -29,7 +28,6 @@ func _ready():
 	$HUD/Talk.hide()
 	rand.randomize()
 	foes = PE.get_all_foes()
-	places = PE.get_all_places()
 	cursor = center.snapped(PE.TILE_SIZE)
 	place_tile(cursor, PE.get_random_settlement() as Tile)
 	tile_map[cursor].visited = true
@@ -60,8 +58,7 @@ func place_foe(tile:Control):
 	_on_scene_pressed(mob)
 
 func place_discovery(tile:Control):
-	var place_i := rand.randi()%places.size()
-	var mob := Mob.new(places[place_i] as Scene)
+	var mob := Mob.new(PE.get_random_place())
 	tile.set_mob(mob)
 	_on_scene_pressed(mob)
 

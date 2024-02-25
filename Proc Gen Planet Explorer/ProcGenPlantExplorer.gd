@@ -2,6 +2,7 @@ extends Node
 
 const TILE_SIZE := Vector2(128, 128)
 
+const ASSET_LISTS := preload("res://Data/AssetLists.gd")
 var rng := RandomNumberGenerator.new()
 const NAMES := ["Jules", "Glorbo", "Gneissi", "Darla"]
 
@@ -12,13 +13,13 @@ func _ready():
 func new_random_player():
 	var result = Player.new()
 	result.focus = PE.get_random_focus() as Focus
-	title=NAMES[rng.randi()%NAMES.size()]
+	result.title=NAMES[rng.randi()%NAMES.size()]
 	
-	var rolls := roll_3d6_array()
+	var rolls := Player.roll_3d6_array()
 	rolls.sort()
 	var i := 2
 	var abl = Abl.new()
-	for s in focus.stats:
+	for s in result.focus.stats:
 		abl.set("max_"+ s, rolls[i])
 		abl.set(s, rolls[i])
 		i -= 1
@@ -29,10 +30,10 @@ func load_foe(title:String)->Scene:
 	return load("res://Data/Scenes/%s.tres" % title) as Scene
 
 func get_random_focus()->Focus:
-	return get_random(Focus, Focus.CHARACTERS_FOLDER) as Focus
+	return load_asset_list().get_random_focus()
 
 func get_random_settlement()->Tile:
-	return get_random(Tile, Tile.CITIES_FOLDER) as Tile
+	return load_asset_list().get_random_settlement()
 
 static func stat_to_string(stat:String, target:Resource)->String:
 	if target.get(stat) != target.get("max_" + stat):
@@ -40,73 +41,24 @@ static func stat_to_string(stat:String, target:Resource)->String:
 		return str(target.get(stat)) + "/" + out_of
 	else:
 		return str(target.get(stat))
-	
-func get_random(type, folder:String):
-	var DIRECTORY_PATH := folder
-	var directory := Directory.new()
-	if directory.open(DIRECTORY_PATH) != OK:
-		return []
-
-	var resources := []
-
-	var err = directory.list_dir_begin()
-	if err != OK: push_error("Directory error " + str(err))
-	var filename = directory.get_next()
-	while filename != "":
-		if filename.ends_with(".tres"):
-			var resource: Resource = load(DIRECTORY_PATH.plus_file(filename))
-			if not (typeof(resource) == typeof(type)):
-				continue
-			resources.append(resource)
-		filename = directory.get_next()
-	directory.list_dir_end()
-	return resources[rng.randi() % resources.size()]
-	
+		
+static func load_asset_list()->Resource:
+	return load(ASSET_LISTS.PATH)
 
 func get_all_tiles()->Dictionary:
-	# from https://gdquest.mavenseed.com/lessons/the-resource-database
-	var DIRECTORY_PATH := "res://Data/Tiles/"
-	var directory := Directory.new()
-	if directory.open(DIRECTORY_PATH) != OK:
-		return {}
-
-	var resources := {}
-
-	var err = directory.list_dir_begin()
-	if err != OK: push_error("Directory error " + str(err))
-	var filename = directory.get_next()
-	while filename != "":
-		if filename.ends_with(".tres"):
-			var resource: Resource = load(DIRECTORY_PATH.plus_file(filename))
-			if not (resource is Tile):
-				continue
-
-			resources[resource.title] = resource
-		filename = directory.get_next()
-	directory.list_dir_end()
-
-	return resources
+	return load_asset_list().get_all_tiles()
 	
-func get_all_places()->Array:
-	var DIRECTORY_PATH := "res://Data/Scenes/Discoveries"
-	var directory := Directory.new()
-	if directory.open(DIRECTORY_PATH) != OK:
-		return []
-
-	var resources := []
-
-	var err = directory.list_dir_begin()
-	if err != OK: push_error("Directory error " + str(err))
-	var filename = directory.get_next()
-	while filename != "":
-		if filename.ends_with(".tres"):
-			var resource: Resource = load(DIRECTORY_PATH.plus_file(filename))
-			if not (resource is Scene):
-				continue
-			resources.append(resource)
-		filename = directory.get_next()
-	directory.list_dir_end()
-	return resources
+func get_all_places()->Dictionary:
+	return load_asset_list().get_all_places()
+	
+func get_random_place()->Scene:
+	return load_asset_list().get_random_place()
+	
+func rand_dict(dict:Dictionary)->Resource:
+	return dict[rand_array(dict.keys())]
+	
+func rand_array(array:Array)->Resource:
+	return array[randi() % array.size()]
 
 func get_all_foes()->Array:
 	# from https://gdquest.mavenseed.com/lessons/the-resource-database

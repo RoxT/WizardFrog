@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource( 1 )
 title = "Snake"
-texture = "Encounter/snake.png"
+texture = "Encounter/Combat/snake.png"
 hp = 5
 dex = 10
 str_ = 10
 wil = 10
-hello = "A snake has seen you. ROLL to discover it's temperment towards you."
 dmg = [ 1, 1, 2, 2, 3, 3 ]
+hello = "A snake has seen you. ROLL to discover it's temperment towards you."
 intro = {
 "roll": [ "H", "C", "I", "W", "R", "O" ]
 }

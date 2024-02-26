@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource( 1 )
 title = "Park"
-texture = "Encounter/creepy_park.jpg"
+texture = "Encounter/Places/creepy_park.jpg"
 hp = -1
 dex = 10
 str_ = 10
 wil = 10
-hello = "A creepy Park"
 dmg = [  ]
+hello = "A creepy Park"
 intro = {
 "roll": [ "H", "C", "I", "W", "R", "O" ]
 }

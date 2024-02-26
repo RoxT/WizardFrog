@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/magic-squirrel.png-362a7c546ad850c8868f099b747262ba.stex"
+path="res://.import/pool.jpg-12af98c63dbc8d95998b0c0849321538.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Encounter/magic-squirrel.png"
-dest_files=[ "res://.import/magic-squirrel.png-362a7c546ad850c8868f099b747262ba.stex" ]
+source_file="res://Encounter/Places/pool.jpg"
+dest_files=[ "res://.import/pool.jpg-12af98c63dbc8d95998b0c0849321538.stex" ]
 
 [params]
 

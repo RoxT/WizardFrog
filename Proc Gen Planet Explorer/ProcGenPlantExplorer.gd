@@ -9,28 +9,37 @@ const NAMES := ["Jules", "Glorbo", "Gneissi", "Darla"]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
-
-func new_random_player():
-	var result = Player.new()
-	result.focus = PE.get_random_focus() as Focus
-	result.title=NAMES[rng.randi()%NAMES.size()]
 	
-	var rolls := Player.roll_3d6_array()
+func new_random_player_creature()->Creature:
+	var result = Creature.new()
+	var focus:Focus = PE.get_random_focus()
+	
+	var rolls := Abl.roll_3d6_array()
 	rolls.sort()
 	var i := 2
 	var abl = Abl.new()
-	for s in result.focus.stats:
+	for s in focus.stats:
 		abl.set("max_"+ s, rolls[i])
 		abl.set(s, rolls[i])
 		i -= 1
-	#To save
+		
+	# new_name:String, new_abl:Abl, new_focus:Focus, new_weapon:Weapon
+	result.apply_player(draw(NAMES), abl, focus)
+	
 	return result
 
 func load_foe(title:String)->Scene:
 	return load("res://Data/Scenes/%s.tres" % title) as Scene
+	
+func load_place(title:String)->Scene:
+	return load("res://Data/Scenes/Discoveries/%s.tres" % title) as Scene
+	
 
 func get_random_focus()->Focus:
 	return load_asset_list().get_random_focus()
+	
+func load_weapon(title:String)->Weapon:
+	return load(Weapon.WEAPONS_FOLDER + title + ".tres") as Weapon
 
 func get_random_settlement()->Tile:
 	return load_asset_list().get_random_settlement()
@@ -53,11 +62,19 @@ func get_all_places()->Dictionary:
 	
 func get_random_place()->Scene:
 	return load_asset_list().get_random_place()
+
+func get_random_foe()->Scene:
+	return load_asset_list().get_random_foe()
 	
-func rand_dict(dict:Dictionary)->Resource:
-	return dict[rand_array(dict.keys())]
+func draw(container)->Resource:
+	if container is Dictionary:
+		return container[_draw_array(container.keys())]
+	if container is Array:
+		return container[randi() % container.size()]
+	push_error("Can only draw from Array or Dictionary")
+	return null
 	
-func rand_array(array:Array)->Resource:
+func _draw_array(array:Array)->Resource:
 	return array[randi() % array.size()]
 
 func get_all_foes()->Array:

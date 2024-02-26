@@ -9,41 +9,40 @@ onready var focus := $Focus
 onready var name_l := $Name
 onready var weapon_l := $Weapon
 
-var combat:Combat = Combat.new()
-export(Resource) var player = Player.new()
+export(Resource) var creature
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if player == null: player = PE.new_random_player()
-	name_l.text = player.title
-	focus.text = player.focus.title
-	weapon_l.text = player.weapon.title
+	if creature == null: creature = PE.new_random_player_creature()
+	name_l.text = creature.title
+	focus.text = creature.focus_title
+	weapon_l.text = creature.weapon_title
 	draw()
 	
 func draw():
-	str_.text = PE.stat_to_string("str_", combat.abl)
-	dex.text = PE.stat_to_string("dex", combat.abl)
-	wil.text = PE.stat_to_string("wil", combat.abl)
+	str_.text = PE.stat_to_string("str_", creature.abl)
+	dex.text = PE.stat_to_string("dex", creature.abl)
+	wil.text = PE.stat_to_string("wil", creature.abl)
 	
-	hp.text = PE.stat_to_string("hp", combat)
+	hp.text = PE.stat_to_string("health", creature)
 	def.text = str(armour())
 	
 func dmg_array()->Array:
-	return combat.dmg
+	return creature.dmg
 
 func initiative()->int:
-	return combat.abl.dex
+	return creature.abl.dex
 
 func hit_deadly(amount:int):
-	combat.hit_deadly(amount)
+	creature.hit_deadly(amount)
 
 func hit_combat(amount:int):
-	combat.hit_combat(amount)
+	creature.hit_combat(amount)
 	
 func moved():
-	combat.hp += max(round(combat.max_hp/2), combat.max_hp)
+	creature.health += max(round(creature.max_health/2), creature.max_health)
 	
 
 func armour()->int:
-	return combat.arm + player.focus.nat_arm
+	return creature.armour
 	

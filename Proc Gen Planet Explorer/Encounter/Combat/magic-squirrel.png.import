@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/creepy_park.jpg-46ba9e2079c98cad490247d148c8f29e.stex"
+path="res://.import/magic-squirrel.png-bdd054c77bfc0d908a467388a6546876.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Encounter/creepy_park.jpg"
-dest_files=[ "res://.import/creepy_park.jpg-46ba9e2079c98cad490247d148c8f29e.stex" ]
+source_file="res://Encounter/Combat/magic-squirrel.png"
+dest_files=[ "res://.import/magic-squirrel.png-bdd054c77bfc0d908a467388a6546876.stex" ]
 
 [params]
 

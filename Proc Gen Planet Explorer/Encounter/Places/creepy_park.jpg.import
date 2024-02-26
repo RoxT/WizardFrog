@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/creepy_park_2.jpg-f7d09f726124bf0867ed299e07cec341.stex"
+path="res://.import/creepy_park.jpg-fb9d7f43aadbd151ccf6d42d9be566e9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Encounter/creepy_park_2.jpg"
-dest_files=[ "res://.import/creepy_park_2.jpg-f7d09f726124bf0867ed299e07cec341.stex" ]
+source_file="res://Encounter/Places/creepy_park.jpg"
+dest_files=[ "res://.import/creepy_park.jpg-fb9d7f43aadbd151ccf6d42d9be566e9.stex" ]
 
 [params]
 

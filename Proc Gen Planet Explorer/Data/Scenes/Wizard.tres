@@ -10,8 +10,8 @@ hp = 3
 dex = 9
 str_ = 8
 wil = 14
-hello = "A wizard has seen you. ROLL to discover it's temperment towards you."
 dmg = [ 1, 2, 3, 4, 5, 6 ]
+hello = "A wizard has seen you. ROLL to discover it's temperment towards you."
 intro = {
 "roll": [ "H", "C", "I", "W", "R", "O" ]
 }

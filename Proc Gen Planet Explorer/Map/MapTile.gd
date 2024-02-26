@@ -2,7 +2,7 @@ extends TextureButton
 
 export(Resource) var tile_override
 var tile:Tile
-var mob:Mob setget set_mob
+var mob:Encounterable setget set_mob
 
 # To Save
 var visited := false
@@ -17,7 +17,7 @@ func _ready():
 	texture_normal = tile.load_texture()
 	set_mob(mob)
 
-func set_mob(value:Mob):
+func set_mob(value:Encounterable):
 	mob = value
 	if mob == null:
 		$SceneTex.hide()

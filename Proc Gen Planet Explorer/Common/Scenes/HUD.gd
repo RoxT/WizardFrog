@@ -25,6 +25,6 @@ func connect_me(target:Node):
 	var err = rollbox.connect("rolled", target, "_on_rolled")
 	if err != OK: push_error("Error connecting HUD to " + target.name)
 	
-func get_player()->Player:
-	return player_leaf.player
+func get_player()->Creature:
+	return player_leaf.creature
 	

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/snake.png-e6a9f2045b22f80b41e724b9021de6d2.stex"
+path="res://.import/creepy_park_2.jpg-ba1ccb5c98ed49dd46440b7040c65989.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Encounter/snake.png"
-dest_files=[ "res://.import/snake.png-e6a9f2045b22f80b41e724b9021de6d2.stex" ]
+source_file="res://Encounter/Places/creepy_park_2.jpg"
+dest_files=[ "res://.import/creepy_park_2.jpg-ba1ccb5c98ed49dd46440b7040c65989.stex" ]
 
 [params]
 

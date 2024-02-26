@@ -3,10 +3,11 @@
 [ext_resource path="res://Common/Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Map/science_world.jpg" type="Texture" id=2]
 [ext_resource path="res://Mockups/scratchy_pen__light_tileset.tres" type="TileSet" id=3]
-[ext_resource path="res://Encounter/creepy_park.jpg" type="Texture" id=4]
-[ext_resource path="res://Encounter/pool.jpg" type="Texture" id=5]
-[ext_resource path="res://Encounter/magic-squirrel.png" type="Texture" id=6]
-[ext_resource path="res://Encounter/snake.png" type="Texture" id=7]
+[ext_resource path="res://Encounter/Places/creepy_park.jpg" type="Texture" id=4]
+[ext_resource path="res://Encounter/Places/pool.jpg" type="Texture" id=5]
+[ext_resource path="res://Encounter/Combat/magic-squirrel.png" type="Texture" id=6]
+[ext_resource path="res://Encounter/Combat/snake.png" type="Texture" id=7]
+
 
 [node name="Node2D" type="Node2D"]
 

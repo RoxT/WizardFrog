@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pool.jpg-1e75fa7718f7d239db2f06e05d481923.stex"
+path="res://.import/snake.png-7f98f0fefa8e5c401d1cf1971100f0c0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Encounter/pool.jpg"
-dest_files=[ "res://.import/pool.jpg-1e75fa7718f7d239db2f06e05d481923.stex" ]
+source_file="res://Encounter/Combat/snake.png"
+dest_files=[ "res://.import/snake.png-7f98f0fefa8e5c401d1cf1971100f0c0.stex" ]
 
 [params]
 

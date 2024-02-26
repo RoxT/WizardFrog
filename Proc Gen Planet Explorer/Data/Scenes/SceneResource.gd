@@ -6,8 +6,8 @@ export var hp := 1
 export var dex := 10
 export var str_ := 10
 export var wil := 10
-export var hello := "It sees you. Roll for temperment."
 export var dmg := [1,2,3,4,5,6]
+export var hello := "It sees you. Roll for temperment."
 export(Dictionary) var intro = {roll = ["H", "C", "I", "W", "R", "O"] }
 export var scenes := {}
 export var sound := "quiet_frogs.ogg"

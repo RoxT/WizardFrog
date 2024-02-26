@@ -1,7 +1,7 @@
 [
     {
         "title": "Park",
-        "texture": "Encounter/creepy_park.jpg",
+        "texture": "Encounter/Places/creepy_park.jpg",
         "hp": -1,
         "sound": "Mountain.ogg",
         "hello": "A creepy Park",
@@ -12,7 +12,7 @@
     },
     {
         "title": "Pool",
-        "texture": "Encounter/pool.jpg",
+        "texture": "Encounter/Places/pool.jpg",
         "hp": -1,
         "sound": "bubbly_waves.ogg",
         "hello": "There is a shallow basin in the pool. Any character who drinks from it will recover one ability point.",
@@ -21,7 +21,7 @@
     },
     {
         "title": "River Quarry",
-        "texture": "Encounter/otter.jpg",
+        "texture": "Encounter/Places/otter.jpg",
         "hp": -1,
         "sound": "otter_eating.ogg",
         "hello": "A hungry otter greets you between mouthfuls of sea urchins.",

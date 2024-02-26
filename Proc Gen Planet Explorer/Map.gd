@@ -13,7 +13,6 @@ onready var UP:Vector2 = Vector2.UP * PE.TILE_SIZE
 onready var DOWN:Vector2 = Vector2.DOWN * PE.TILE_SIZE
 onready var RIGHT:Vector2 = Vector2.RIGHT * PE.TILE_SIZE
 onready var LEFT:Vector2 = Vector2.LEFT * PE.TILE_SIZE
-var foes := []
 var possible_tiles := {}
 var cursor:Vector2
 var rand := RandomNumberGenerator.new()
@@ -27,7 +26,6 @@ var rations := 10
 func _ready():
 	$HUD/Talk.hide()
 	rand.randomize()
-	foes = PE.get_all_foes()
 	cursor = center.snapped(PE.TILE_SIZE)
 	place_tile(cursor, PE.get_random_settlement() as Tile)
 	tile_map[cursor].visited = true
@@ -52,13 +50,14 @@ func err(err:int):
 		push_warning("Error connecting:" + str(err))
 
 func place_foe(tile:Control):
-	var foe_i := rand.randi()%foes.size()
-	var mob := Mob.new(foes[foe_i] as Scene)
+	var mob := Creature.new()
+	mob.apply_scene(PE.get_random_foe())
 	tile.set_mob(mob)
 	_on_scene_pressed(mob)
 
 func place_discovery(tile:Control):
-	var mob := Mob.new(PE.get_random_place())
+	var mob := Place.new()
+	mob.apply_scene(PE.get_random_place())
 	tile.set_mob(mob)
 	_on_scene_pressed(mob)
 
@@ -75,7 +74,7 @@ func place_tile(pos:Vector2, to_place:Tile=random_tile()):
 	print("placed " + str(tile.rect_position))
 
 func random_tile()->Tile:
-	return possible_tiles[possible_tiles.keys()[randi()%possible_tiles.keys().size()]]
+	return PE.draw(possible_tiles) as Tile
 
 func move_player(pos:Vector2):
 	pos = pos.snapped(PE.TILE_SIZE)
@@ -159,8 +158,8 @@ func _on_tile_clicked(tile:TextureButton):
 		$HUD/Talk.text = "Tap tile again or 'Roll' to roll for encounter and spend " + str(data.rations) + " rations to move into tile."
 	$HUD/Talk.show()
 	
-func _on_scene_pressed(mob:Mob):
-	print(mob.title())
+func _on_scene_pressed(mob:Encounterable):
+	print(mob.title)
 	var battle = BATTLE_SCENE.instance()
 	battle.hud = hud
 	battle.tile = last_tile_clicked

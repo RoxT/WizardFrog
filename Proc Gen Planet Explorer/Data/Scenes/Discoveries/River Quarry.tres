@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource( 1 )
 title = "River Quarry"
-texture = "Encounter/otter.jpg"
+texture = "Encounter/Places/otter.jpg"
 hp = -1
 dex = 10
 str_ = 10
 wil = 10
-hello = "A hungry otter greets you between mouthfuls of sea urchins."
 dmg = [  ]
+hello = "A hungry otter greets you between mouthfuls of sea urchins."
 intro = {
 "options": [ "What is this place?", "Mine", "Fish", "Leave" ],
 "roll": [  ]

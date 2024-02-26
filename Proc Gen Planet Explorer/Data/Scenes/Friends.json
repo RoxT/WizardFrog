@@ -19,7 +19,7 @@
     },
     {  
         "title": "Snake",
-        "texture": "Encounter/snake.png",
+        "texture": "Encounter/Combat/snake.png",
         "hp": 5,
         "Dex": 15, "str_": 10, "Wil": 10,
         "hello": "A snake has seen you. ROLL to discover it's temperment towards you.",
@@ -33,7 +33,7 @@
     },
     {  
         "title": "Poet Squirrel",
-        "texture": "Encounter/magic-squirrel.png",
+        "texture": "Encounter/Combat/magic-squirrel.png",
         "hp": 13,
         "Dex": 11, "str_": 8, "Wil": 12,
         "hello": "A Squirrel has seen you. ROLL to discover it's temperment towards you.",

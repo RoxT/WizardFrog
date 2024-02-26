@@ -1,7 +1,7 @@
 class_name Focus
 extends Resource
 export(String) var title
-export(Array) var stats = ["str", "dex", "wil"]
+export(Array) var stats = ["str_", "dex", "wil"]
 export(int) var nat_arm
 export(String) var ability
 export(String) var default_weapon
@@ -11,7 +11,7 @@ const FOCUSES_JSON  := "res://Data/Characters/focuses.json"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_title="Unknown", new_stats=["str", "dex", "wil"], new_nat_arm=1, new_ability="Undescribed", new_default_weapon="Unknown"):
+func _init(new_title="Unknown", new_stats=["str_", "dex", "wil"], new_nat_arm=1, new_ability="Undescribed", new_default_weapon="Unknown"):
 	title = new_title
 	stats = new_stats
 	nat_arm = new_nat_arm

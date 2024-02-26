@@ -45,3 +45,7 @@ func get_random_settlement()->Tile:
 	
 func get_random_place()->Scene:
 	return _get_random(discoveries, Scene.DISCOVERIES_FOLDER) as Scene
+	
+func get_random_foe()->Scene:
+	return _get_random(scenes, Scene.SCENES_FOLDER) as Scene
+	

@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource( 1 )
 title = "Pool"
-texture = "Encounter/pool.jpg"
+texture = "Encounter/Places/pool.jpg"
 hp = -1
 dex = 10
 str_ = 10
 wil = 10
-hello = "There is a shallow basin in the pool. Any character who drinks from it will recover one ability point."
 dmg = [  ]
+hello = "There is a shallow basin in the pool. Any character who drinks from it will recover one ability point."
 intro = {
 "options": [ "Drink", "Leave" ],
 "roll": [  ]

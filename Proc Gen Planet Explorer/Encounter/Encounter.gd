@@ -7,7 +7,7 @@ export(Resource) var scene_override
 
 var hud
 var scene:Scene
-var mob:Mob
+var mob:Encounterable
 var tile:Control
 var turns := []
 var turn_i := 0
@@ -19,10 +19,14 @@ func _ready():
 		hud = load("res://Common/Scenes/HUD.tscn").instance()
 		add_child(hud)
 		hud.connect_me(self)
-		mob = Mob.new(scene_override) as Mob
+		mob = Creature.new()
+		mob.apply_scene(scene_override)
 	else:
 		mob = tile.mob
-	scene = mob.scene
+	if mob is Place:
+		scene = PE.load_place(mob.scene_title)
+	else:
+		scene = PE.load_foe(mob.scene_title)
 	hud.reset()
 	$Panel.modulate.a = 0.7
 	
@@ -40,8 +44,8 @@ func _ready():
 	
 
 func draw_hp():
-	if mob.has_combat():
-		$Portrait/HP.text = "Health: " + str(mob.combat.hp)
+	if mob is Creature:
+		$Portrait/HP.text = "Health: " + str(mob.health)
 	else:
 		$Portrait/HP.hide()
 		
@@ -50,13 +54,13 @@ func _on_rolled(roll:String):
 	$Panel.modulate.a = 1
 	if !turns.empty():
 		hud.talk.text = ""
-		if turns[turn_i] is Player:
+		if turns[turn_i].is_player():
 			if int(roll) >= 0:
 				hud.talk.add_text("You hit for " + roll)
 				hud.talk.newline()
-				mob.combat.hp -= int(roll)
+				mob.health -= int(roll)
 				draw_hp()
-				if mob.combat.hp <= 0:
+				if mob.health <= 0:
 					hud.talk.add_text("The beast is destroyed!")
 					hud.next.connect_options(self, ["Leave"])
 					hud.no_roll()
@@ -74,12 +78,11 @@ func _on_rolled(roll:String):
 		hud.next.connect_options(self, next_scene.options)
 	
 		
-func turn(combatant):
+func turn(creature:Creature):
 	turn_i = (turn_i + 1)%turns.size()
-	var combat:Combat = combatant.combat
-	if combatant is Player:
-		hud.talk.add_text("Roll to swing your %s." % combatant.weapon.title)
-		hud.rollbox.actions = combat.dmg
+	if creature.is_player():
+		hud.talk.add_text("Roll to swing your %s." % creature.weapon_title)
+		hud.rollbox.actions = creature.dmg()
 		hud.next.connect_options(self, ["Flee"])
 	else:
 		hud.next.connect_options(self, ["Next"])
@@ -89,15 +92,15 @@ func turn(combatant):
 func _on_Next_pressed(option:String):
 	match option:
 		"Fight!": 
-			$TurnManager.combatants = [scene, hud.get_player()]
-			turns = [hud.player_leaf.player, mob]
-			turns.sort_custom(Combat, "initiative")
+			turns = [hud.get_player(), mob]
+			turns.sort_custom(Creature, "initiative")
+			$TurnManager.combatants = turns
 			if tile: tile.hostile = true
 			_on_rolled("-1")
 			hud.next.connect_options(self, ["Flee"])
 			mob_target = hud.player_leaf
 		"Drink":
-			hud.player_leaf.player.combat.heal_ability()
+			hud.get_player().heal_ability()
 			#Character flashes?
 			leave()
 		"Leave":

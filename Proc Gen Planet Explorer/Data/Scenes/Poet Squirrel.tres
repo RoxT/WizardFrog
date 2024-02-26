@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource( 1 )
 title = "Poet Squirrel"
-texture = "Encounter/magic-squirrel.png"
+texture = "Encounter/Combat/magic-squirrel.png"
 hp = 13
 dex = 10
 str_ = 8
 wil = 10
-hello = "A Squirrel has seen you. ROLL to discover it's temperment towards you."
 dmg = [ 1, 2, 2, 5, 6, 7 ]
+hello = "A Squirrel has seen you. ROLL to discover it's temperment towards you."
 intro = {
 "roll": [ "H", "C", "I", "W", "R", "O" ]
 }

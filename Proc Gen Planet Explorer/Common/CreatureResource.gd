@@ -36,6 +36,7 @@ func hit_combat(amount:int):
 	if health-amount <0:
 		health = 0
 		return true
+	health = health-amount
 	return false
 	
 static func initiative(a, b)->bool:

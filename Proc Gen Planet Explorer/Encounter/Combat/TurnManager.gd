@@ -40,7 +40,11 @@ func is_player_turn()->bool:
 	return get_children()[turn].creature.is_player()
 
 func do_turn():
-	turn = (turn+1)&combatants.size()
+	turn = (turn+1) % combatants.size()
+	
+func draw():
+	for c in get_children():
+		c.draw()
 	
 func _leaf(creature:Creature)->Panel:
 	var l

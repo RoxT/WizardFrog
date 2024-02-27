@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Encounter/Combat/TurnManager.gd" type="Script" id=1]
 [ext_resource path="res://Data/Scenes/Snake.tres" type="Resource" id=2]
-[ext_resource path="res://Data/Characters/Poet.tres" type="Resource" id=3]
+[ext_resource path="res://Data/Characters/Swordmaster.tres" type="Resource" id=3]
 [ext_resource path="res://Data/Characters/Ecologist.tres" type="Resource" id=4]
 
 [node name="TurnManager" type="VFlowContainer"]

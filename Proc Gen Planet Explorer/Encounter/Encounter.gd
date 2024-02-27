@@ -70,7 +70,8 @@ func _on_rolled(roll:String):
 		else:
 			mob_target.hit_combat(int(roll))
 			hud.talk.text = "You were hit for %s."%roll
-			hud.no_roll()
+		turn_manager.draw()
+		hud.no_roll()
 		turn_manager.do_turn()
 		turn()
 	else:
@@ -89,7 +90,7 @@ func turn():
 		hud.next.connect_options(self, ["Flee"])
 	else:
 		hud.next.connect_options(self, ["Next"])
-		mob_target = hud.player_leaf
+		mob_target = hud.get_player()
 
 #Passed from Map
 func _on_Next_pressed(option:String):
@@ -99,7 +100,7 @@ func _on_Next_pressed(option:String):
 			turn_manager.combatants = [mob, hud.get_player()]
 			add_child(turn_manager)
 			if tile: tile.hostile = true
-			mob_target = hud.player_leaf
+			mob_target = hud.get_player()
 			turn()
 		"Drink":
 			hud.get_player().heal_ability()

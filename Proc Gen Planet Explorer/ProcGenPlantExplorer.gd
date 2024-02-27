@@ -10,9 +10,8 @@ const NAMES := ["Jules", "Glorbo", "Gneissi", "Darla"]
 func _ready():
 	rng.randomize()
 	
-func new_random_player_creature()->Creature:
+func new_random_player_creature(focus:= PE.get_random_focus())->Creature:
 	var result = Creature.new()
-	var focus:Focus = PE.get_random_focus()
 	
 	var rolls := Abl.roll_3d6_array()
 	rolls.sort()

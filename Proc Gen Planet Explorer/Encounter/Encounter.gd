@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const TURN_MANAGER := preload("res://Encounter/Combat/TurnManager.tscn")
+
 onready var portrait := $Portrait
 onready var audio_player := $AudioStreamPlayer
 const PATH := "res://%s"
@@ -9,9 +11,8 @@ var hud
 var scene:Scene
 var mob:Encounterable
 var tile:Control
-var turns := []
-var turn_i := 0
 var mob_target
+var turn_manager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,9 +53,9 @@ func draw_hp():
 #Passed from Map
 func _on_rolled(roll:String):
 	$Panel.modulate.a = 1
-	if !turns.empty():
+	if turn_manager != null:
 		hud.talk.text = ""
-		if turns[turn_i].is_player():
+		if turn_manager.is_player_turn():
 			if int(roll) >= 0:
 				hud.talk.add_text("You hit for " + roll)
 				hud.talk.newline()
@@ -69,7 +70,9 @@ func _on_rolled(roll:String):
 		else:
 			mob_target.hit_combat(int(roll))
 			hud.talk.text = "You were hit for %s."%roll
-		turn(turns[turn_i])
+			hud.no_roll()
+		turn_manager.do_turn()
+		turn()
 	else:
 		var next_scene = scene.scenes[roll]
 		if !(next_scene is Dictionary):
@@ -78,8 +81,8 @@ func _on_rolled(roll:String):
 		hud.next.connect_options(self, next_scene.options)
 	
 		
-func turn(creature:Creature):
-	turn_i = (turn_i + 1)%turns.size()
+func turn():
+	var creature:Creature = turn_manager.current()
 	if creature.is_player():
 		hud.talk.add_text("Roll to swing your %s." % creature.weapon_title)
 		hud.rollbox.actions = creature.dmg()
@@ -91,14 +94,13 @@ func turn(creature:Creature):
 #Passed from Map
 func _on_Next_pressed(option:String):
 	match option:
-		"Fight!": 
-			turns = [hud.get_player(), mob]
-			turns.sort_custom(Creature, "initiative")
-			$TurnManager.combatants = turns
+		"Fight!":
+			turn_manager = TURN_MANAGER.instance()
+			turn_manager.combatants = [mob, hud.get_player()]
+			add_child(turn_manager)
 			if tile: tile.hostile = true
-			_on_rolled("-1")
-			hud.next.connect_options(self, ["Flee"])
 			mob_target = hud.player_leaf
+			turn()
 		"Drink":
 			hud.get_player().heal_ability()
 			#Character flashes?
@@ -108,6 +110,8 @@ func _on_Next_pressed(option:String):
 			leave()
 		"Flee":
 			leave()
+		"Next":
+			_on_rolled(str(turn_manager.roll_dmg()))
 		var next_scene:
 			_on_rolled(next_scene)
 

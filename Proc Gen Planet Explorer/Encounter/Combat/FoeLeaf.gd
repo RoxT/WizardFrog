@@ -26,8 +26,11 @@ func initiative()->int:
 	return creature.abl.dex
 
 func hit_deadly(amount:int):
-	creature.hit_deadly(amount)
+	return creature.hit_deadly(amount)
 
 func hit_combat(amount:int):
-	creature.hit_combat(amount)
+	return creature.hit_combat(amount)
+	
+func roll_dmg()->int:
+	return creature.dmg()[randi()%creature.dmg().size()] as int
 	

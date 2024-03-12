@@ -143,6 +143,7 @@ func _on_tile_clicked(tile:TextureButton):
 		return
 	tile.select(frame)
 	var data := tile.tile as Tile
+	$UI/TileLeaf.tile = data
 	last_tile_clicked = tile
 	
 	if tile.visited:

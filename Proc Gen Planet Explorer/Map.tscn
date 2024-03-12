@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Map.gd" type="Script" id=1]
 [ext_resource path="res://Common/Scenes/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Map/Frame.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Sword.png" type="Texture" id=4]
 [ext_resource path="res://Player/bg.png" type="Texture" id=5]
+[ext_resource path="res://Map/TileLeaf.tscn" type="PackedScene" id=6]
 
 [node name="Map" type="Control"]
 anchor_right = 1.0
@@ -42,5 +43,7 @@ offset = Vector2( 64, 64 )
 
 [node name="Frame" parent="UI" instance=ExtResource( 3 )]
 visible = false
+
+[node name="TileLeaf" parent="UI" instance=ExtResource( 6 )]
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]

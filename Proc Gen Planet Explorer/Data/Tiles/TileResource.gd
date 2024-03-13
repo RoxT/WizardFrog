@@ -5,8 +5,11 @@ export var texture := "mountains.svg"
 export var rations := 3
 export var has_water := false
 export var settlement := false
-export var sound := "quiet_frogs.ogg"
+export var sound := ""
 export var outcomes := ["Discovery", "Encounter", "Encounter"]
+export var visited := false
+export var hostile := false
+export(Resource) var mob = null #Encounterable
 const TILES_FOLDER  := "res://Data/Tiles/"
 const CITIES_FOLDER := "res://Data/Tiles/Settlements/"
 const TILES_JSON  := "res://Data/Tiles/tiles.json"
@@ -15,14 +18,14 @@ const CITIES_JSON := "res://Data/Tiles/Settlements/settlement_tiles.json"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_title:="Mountains", new_texture:="mountains.svg", new_rations:=3, new_has_water=false, new_settlement=false, new_sound:="", new_outcomes=["Discovery", "Encounter", "Encounter"]):
-	title = new_title
-	texture = new_texture
-	rations = new_rations
-	has_water = new_has_water
-	settlement = new_settlement
-	sound = new_sound
-	outcomes = new_outcomes
+func _init():
+	pass
+	
+func rations_str()->String:
+	return str(rations)
+	
+func can_visit()->bool:
+	return mob != null and hostile != false
 	
 func load_outcomes()->Array:
 	var value := []

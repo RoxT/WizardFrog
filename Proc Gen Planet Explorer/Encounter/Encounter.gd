@@ -10,13 +10,13 @@ export(Resource) var scene_override
 var hud
 var scene:Scene
 var mob:Encounterable
-var tile:Control
+var tile:Tile
 var mob_target
 var turn_manager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if hud == null: #Debug Mode
+	if hud == null and OS.is_debug_build():
 		hud = load("res://Common/Scenes/HUD.tscn").instance()
 		add_child(hud)
 		hud.connect_me(self)
@@ -31,7 +31,7 @@ func _ready():
 	hud.reset()
 	$Panel.modulate.a = 0.7
 	
-	hud.talk.text = scene.hello
+	hud.talk(scene.hello)
 	portrait.texture = scene.load_texture()
 	draw_hp()
 	hud.rollbox.actions = scene.intro.roll
@@ -54,22 +54,21 @@ func draw_hp():
 func _on_rolled(roll:String):
 	$Panel.modulate.a = 1
 	if turn_manager != null:
-		hud.talk.text = ""
+		hud.talk("")
 		if turn_manager.is_player_turn():
 			if int(roll) >= 0:
-				hud.talk.add_text("You hit for " + roll)
-				hud.talk.newline()
+				hud.talk_add_line("You hit for " + roll)
 				mob.health -= int(roll)
 				draw_hp()
 				if mob.health <= 0:
-					hud.talk.add_text("The beast is destroyed!")
+					hud.talk_add_line("The beast is destroyed!")
 					hud.next.connect_options(self, ["Leave"])
 					hud.no_roll()
 					if tile: tile.mob = null # Remove from save???
 					return
 		else:
 			mob_target.hit_combat(int(roll))
-			hud.talk.text = "You were hit for %s."%roll
+			hud.talk("You were hit for %s."%roll)
 		turn_manager.draw()
 		hud.no_roll()
 		turn_manager.do_turn()
@@ -78,14 +77,14 @@ func _on_rolled(roll:String):
 		var next_scene = scene.scenes[roll]
 		if !(next_scene is Dictionary):
 			next_scene = scene.scenes[next_scene as String]
-		hud.talk.text = next_scene.talk
+		hud.talk(next_scene.talk)
 		hud.next.connect_options(self, next_scene.options)
 	
 		
 func turn():
 	var creature:Creature = turn_manager.current()
 	if creature.is_player():
-		hud.talk.add_text("Roll to swing your %s." % creature.weapon_title)
+		hud.talk_add_line("Roll to swing your %s." % creature.weapon_title)
 		hud.rollbox.actions = creature.dmg()
 		hud.next.connect_options(self, ["Flee"])
 	else:
@@ -118,7 +117,7 @@ func _on_Next_pressed(option:String):
 
 func leave():
 	hud.rollbox.empty_actions()
-	hud.talk.text = ""
+	hud.talk("")
 	hud.next.destroy_options()
 	queue_free()
 

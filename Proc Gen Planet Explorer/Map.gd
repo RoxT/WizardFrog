@@ -1,7 +1,7 @@
 extends Control
 
 const MAPTILE:PackedScene = preload("res://Map/MapTile.tscn")
-const BATTLE_SCENE:PackedScene = preload("res://Encounter/Encounter.tscn")
+const ENCOUNTER_SCENE:PackedScene = preload("res://Encounter/Encounter.tscn")
 onready var tiles_layer := $TilesLayer
 onready var foe_layer := $FoesLayer
 onready var hud := $HUD
@@ -24,11 +24,10 @@ var rations := 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$HUD/Talk.hide()
+	$HUD.talk("")
 	rand.randomize()
 	cursor = center.snapped(PE.TILE_SIZE)
 	place_tile(cursor, PE.get_random_settlement() as Tile)
-	tile_map[cursor].visited = true
 	move_player(cursor)
 	possible_tiles = PE.get_all_tiles()
 	for _i in range(20):
@@ -53,13 +52,13 @@ func place_foe(tile:Control):
 	var mob := Creature.new()
 	mob.apply_scene(PE.get_random_foe())
 	tile.set_mob(mob)
-	_on_scene_pressed(mob)
+	_start_encounter(mob)
 
 func place_discovery(tile:Control):
 	var mob := Place.new()
 	mob.apply_scene(PE.get_random_place())
 	tile.set_mob(mob)
-	_on_scene_pressed(mob)
+	_start_encounter(mob)
 
 func place_tile(pos:Vector2, to_place:Tile=random_tile()):
 	if pos.snapped(PE.TILE_SIZE) in tile_map:
@@ -90,20 +89,19 @@ func _on_roll(outcome:String):
 		battle._on_Next_pressed(outcome)
 		return
 
-	if last_tile_clicked.visited:
-		_move_into_last_clicked()
-		if last_tile_clicked.hostile:
-			_on_scene_pressed(last_tile_clicked.mob)
+	_move_into_last_clicked()
+	
+	if last_tile_clicked.tile.hostile:
+		_start_encounter(last_tile_clicked.tile.mob)
 		return
 		
-	_move_into_last_clicked()
 	match outcome:
 		"Nothing": pass
 		"Discovery":
-			$HUD/Talk.text = "You found something cool"
+			$HUD.talk("You found something cool")
 			place_discovery(last_tile_clicked)
 		"Encounter":
-			$HUD/Talk.text = "Someone has seen you"
+			$HUD.talk("Someone has seen you")
 			place_foe(last_tile_clicked)
 	var pos = last_tile_clicked.rect_position
 	if !tile_map.has(pos + RIGHT):
@@ -119,7 +117,6 @@ func _move_into_last_clicked():
 	cursor = last_tile_clicked.rect_position
 	rations -= last_tile_clicked.tile.rations
 	move_player(last_tile_clicked.rect_position)
-	last_tile_clicked.visited = true
 	$UI/Rations.text = str(rations)
 		
 func _on_Next_pressed(option:String):
@@ -130,38 +127,34 @@ func _on_Next_pressed(option:String):
 		match option:
 			"Visit": 
 				_move_into_last_clicked()
-				_on_scene_pressed(last_tile_clicked.mob)
+				_start_encounter(last_tile_clicked.tile.mob)
 
-func _on_tile_clicked(tile:TextureButton):
+func _on_tile_clicked(map_tile:TextureButton):
 	hud.next.destroy_options()
 	hud.rollbox.set_no_roll()
 	rand.randomize()
-	if tile.rect_position.distance_to(player.position) != PE.TILE_SIZE.x:
+	if map_tile.rect_position.distance_to(player.position) != PE.TILE_SIZE.x:
 		rollbox.actions = []
-		$HUD/Talk.text = "Choose a tile adjacent to you to move."
+		$HUD.talk("Choose a tile adjacent to you to move.")
 		frame.hide()
 		return
-	tile.select(frame)
-	var data := tile.tile as Tile
+	map_tile.select(frame)
+	var data := map_tile.tile as Tile
 	$UI/TileLeaf.tile = data
-	last_tile_clicked = tile
+	last_tile_clicked = map_tile
 	
-	if tile.visited:
-		if tile.mob == null or tile.hostile:
-			$HUD/Talk.text = "Tap Go to spend " + str(data.rations) + " rations to move into tile."
+	if data.visited:
+		if map_tile.can_visit():
+			hud.next.connect_options(self, ["Visit"])
 			hud.just_go()
 		else:
-			$HUD/Talk.text = "Tap Go or Visit to spend " + str(data.rations) + " rations to move into tile."
-			hud.next.connect_options(self, ["Visit"])
 			hud.just_go()
 	else:
 		rollbox.set_actions(data.load_outcomes())
-		$HUD/Talk.text = "Tap tile again or 'Roll' to roll for encounter and spend " + str(data.rations) + " rations to move into tile."
-	$HUD/Talk.show()
 	
-func _on_scene_pressed(mob:Encounterable):
+func _start_encounter(mob:Encounterable):
 	print(mob.title)
-	var battle = BATTLE_SCENE.instance()
+	var battle = ENCOUNTER_SCENE.instance()
 	battle.hud = hud
-	battle.tile = last_tile_clicked
+	battle.tile = last_tile_clicked.tile
 	add_child(battle)

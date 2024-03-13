@@ -2,28 +2,29 @@ extends TextureButton
 
 export(Resource) var tile_override
 var tile:Tile
-var mob:Encounterable setget set_mob
-
-# To Save
-var visited := false
-var hostile := false
 
 signal clicked(map_tile)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	visit(visited)
 	if tile == null: tile = tile_override
+	visit(tile.visited)
 	texture_normal = tile.load_texture()
-	set_mob(mob)
+	set_mob(tile.mob)
+	
+func can_visit()->bool:
+	return tile.can_visit()
+
+func rations_str()->String:
+	return tile.rations_str()
 
 func set_mob(value:Encounterable):
-	mob = value
-	if mob == null:
+	tile.mob = value
+	if value == null:
 		$SceneTex.hide()
 	else:
 		$SceneTex.show()
-		var tex:Texture = mob.load_texture()
+		var tex:Texture = value.load_texture()
 		$SceneTex.texture = tex
 		$SceneTex.rect_scale = PE.TILE_SIZE/tex.get_size()
 
@@ -35,7 +36,7 @@ func place(x:float, y:float)->Vector2:
 	return rect_position
 	
 func visit(value=true):
-	visited = value
+	tile.visited = value
 	if value:
 		$AnimationPlayer.play("Visited")
 	else:

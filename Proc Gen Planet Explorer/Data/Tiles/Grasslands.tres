@@ -11,3 +11,5 @@ has_water = false
 settlement = false
 sound = ""
 outcomes = [ "Discovery", "Encounter", "Encounter" ]
+visited = false
+hostile = false

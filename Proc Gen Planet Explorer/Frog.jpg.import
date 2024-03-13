@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wizard.webp-3eeab6ada69ae92bc6e78e10973ec939.stex"
+path="res://.import/Frog.jpg-48299f509a4977e67889df2c6a862f2f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Chaoclypse/wizard.webp"
-dest_files=[ "res://.import/wizard.webp-3eeab6ada69ae92bc6e78e10973ec939.stex" ]
+source_file="res://Frog.jpg"
+dest_files=[ "res://.import/Frog.jpg-48299f509a4977e67889df2c6a862f2f.stex" ]
 
 [params]
 

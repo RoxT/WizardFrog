@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Common/Scenes/ContinueBtn.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Chaoclypse/frog.webp" type="Texture" id=2]
-[ext_resource path="res://Chaoclypse/snake.webp" type="Texture" id=3]
+[ext_resource path="res://Encounter/Combat/snake.png" type="Texture" id=3]
 [ext_resource path="res://default_theme.tres" type="Theme" id=4]
 
 [node name="Control" type="Control"]
@@ -26,11 +26,13 @@ text = "Monsters"
 align = 1
 
 [node name="Snake" type="TextureRect" parent="Panel/Title"]
-margin_left = 141.0
-margin_top = 66.0
-margin_right = 532.0
-margin_bottom = 457.0
+margin_left = 148.0
+margin_top = 45.0
+margin_right = 568.0
+margin_bottom = 473.0
 texture = ExtResource( 3 )
+expand = true
+stretch_mode = 1
 
 [node name="Desc" type="Label" parent="Panel/Title"]
 margin_left = 36.0

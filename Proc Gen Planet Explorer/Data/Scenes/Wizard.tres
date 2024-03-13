@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 title = "Wizard"
-texture = "Chaoclypse/wizard.webp"
+texture = "Encounter/Combat/wizardfrog.png"
 hp = 3
 dex = 9
 str_ = 8

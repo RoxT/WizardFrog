@@ -1,7 +1,7 @@
 [
     {
         "title": "Wizard",
-        "texture": "Chaoclypse/wizard.webp",
+        "texture": "Encounter/Combat/wizardfrog.png",
         "sound": "quiet_frogs.ogg",
         "hp": 3,
         "dex": 9, "str_": 8, "wil": 14,

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Frog.webp-3373643ee8835f573769f5c80df5015c.stex"
+path="res://.import/wizardfrog.png-a52177a5c6bb8f991f5a15825242463d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Frog.webp"
-dest_files=[ "res://.import/Frog.webp-3373643ee8835f573769f5c80df5015c.stex" ]
+source_file="res://Encounter/Combat/wizardfrog.png"
+dest_files=[ "res://.import/wizardfrog.png-a52177a5c6bb8f991f5a15825242463d.stex" ]
 
 [params]
 

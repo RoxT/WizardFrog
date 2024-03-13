@@ -76,7 +76,7 @@ _global_script_class_icons={
 
 config/name="Proc Gen Planet Explorer"
 run/main_scene="res://Map.tscn"
-config/icon="res://Frog.webp"
+config/icon="res://Frog.jpg"
 
 [autoload]
 

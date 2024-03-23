@@ -86,9 +86,9 @@ func turn():
 	if creature.is_player():
 		hud.talk_add_line("Roll to swing your %s." % creature.weapon_title)
 		hud.rollbox.actions = creature.dmg()
-		hud.next.connect_options(self, ["Flee"])
+		hud.next.connect_options(self, hud.next.FLEE_ONLY)
 	else:
-		hud.next.connect_options(self, ["Next"])
+		hud.next.connect_options(self, hud.next.NEXT_FLEE)
 		mob_target = hud.get_player()
 
 #Passed from Map

@@ -81,7 +81,10 @@ func move_player(pos:Vector2):
 	tile_map[pos].visit()
 
 func _on_frame_pressed():
-	rollbox._on_Roll_pressed()
+	if rollbox.can_just_go():
+		_on_roll("Nothing")
+	else:
+		rollbox._on_Roll_pressed()
 
 func _on_roll(outcome:String):
 	var battle = get_node_or_null("Encounter")
@@ -98,10 +101,10 @@ func _on_roll(outcome:String):
 	match outcome:
 		"Nothing": pass
 		"Discovery":
-			$HUD.talk("You found something cool")
+			hud.talk("You found something cool")
 			place_discovery(last_tile_clicked)
 		"Encounter":
-			$HUD.talk("Someone has seen you")
+			hud.talk("Someone has seen you")
 			place_foe(last_tile_clicked)
 	var pos = last_tile_clicked.rect_position
 	if !tile_map.has(pos + RIGHT):
@@ -130,12 +133,9 @@ func _on_Next_pressed(option:String):
 				_start_encounter(last_tile_clicked.tile.mob)
 
 func _on_tile_clicked(map_tile:TextureButton):
-	hud.next.destroy_options()
-	hud.rollbox.set_no_roll()
-	rand.randomize()
+	hud.clear()
 	if map_tile.rect_position.distance_to(player.position) != PE.TILE_SIZE.x:
 		rollbox.actions = []
-		$HUD.talk("Choose a tile adjacent to you to move.")
 		frame.hide()
 		return
 	map_tile.select(frame)
@@ -146,9 +146,7 @@ func _on_tile_clicked(map_tile:TextureButton):
 	if data.visited:
 		if map_tile.can_visit():
 			hud.next.connect_options(self, ["Visit"])
-			hud.just_go()
-		else:
-			hud.just_go()
+		hud.just_go()
 	else:
 		rollbox.set_actions(data.load_outcomes())
 	

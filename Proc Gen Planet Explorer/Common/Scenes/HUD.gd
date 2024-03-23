@@ -16,6 +16,10 @@ func just_go():
 func no_roll():
 	rollbox.no_roll()
 	
+func clear():
+	next.destroy_options()
+	rollbox.set_no_roll()
+	
 func talk(text:String):
 	if text == null or text.empty():
 		_talk.text = ""

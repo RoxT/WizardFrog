@@ -20,6 +20,9 @@ func _ready():
 
 func set_no_roll():
 	$Roll.disabled = true
+	
+func can_just_go()->bool:
+	return $Roll.disabled
 
 func empty_actions():
 	for l in label_list:
